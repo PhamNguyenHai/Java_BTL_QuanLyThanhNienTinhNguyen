@@ -5,9 +5,11 @@
 package View;
 
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import qlsinhvientinhnguyen.Models;
 import qlsinhvientinhnguyen.TaiKhoan;
+import qlsvtinhnguyen.TrangChuSV;
 
 /**
  *
@@ -112,29 +114,38 @@ public class DangNhapView extends javax.swing.JFrame {
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         try{
+               model.Import();
+//               String kq = "";
+//               for(TaiKhoan i : model.getListTaiKhoans())
+//                   kq += i.getTenDN() + " | " + i.getMatKhau();
+//               txtUsername.setText(kq);
+            if(txtPassword.getPassword().equals("") || txtUsername.getText().equals(""))
+                throw new Exception("Vui lòng nhập đủ user name và password");
+
+            TaiKhoan checkTK = null;
+            for(TaiKhoan i : model.getListTaiKhoans())
+                if(i.getTenDN().equals(txtUsername.getText().trim()) && i.getMatKhau().equals(new String(txtPassword.getPassword())))
+                    checkTK = i;
             
-            model.Import();
-            ArrayList<TaiKhoan> listk = model.getListTaiKhoans();
-            txtUsername.setText(listk.get(0).getTenDN());
-//            if(txtPassword.getPassword().equals("") || txtUsername.getText().equals(""))
-//                throw new Exception("Vui lòng nhập đủ user name và password");
-//
-//            TaiKhoan acc = new TaiKhoan(txtUsername.getText().trim(), new String(txtPassword.getPassword()));
-//            
-//            if(model.getListTaiKhoans().contains(acc)){
-//                TaiKhoan checkTK = null;
-//                checkTK = model.getListTaiKhoans().get(model.getListTaiKhoans().indexOf(acc));
-//                if(checkTK != null){
-//                    if(checkTK.getQuyenTruyCap() == 1){
-//                        JOptionPane.showMessageDialog(null, "admin");
-//                    }
-//                    else{
-//                        JOptionPane.showMessageDialog(null, "User");
-//                    }
-//                }                
-//            }
-//            else
-//                throw new Exception("Tài khoản không tồn tại");
+            if(checkTK != null){
+                if(checkTK != null){
+                    if(checkTK.getQuyenTruyCap() == 1){
+                        TrangChu adminTrangChu = new TrangChu();
+                        adminTrangChu.setLocationRelativeTo(null);
+                        adminTrangChu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        adminTrangChu.setVisible(true);
+                    }
+                    else{
+                        TrangChuSV trangChu = new TrangChuSV();
+                        trangChu.setLocationRelativeTo(null);
+                        trangChu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        trangChu.setVisible(true);
+                    }
+                }                
+            }
+            else{
+                throw new Exception("Tài khoản không tồn tại");
+            }
             
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
