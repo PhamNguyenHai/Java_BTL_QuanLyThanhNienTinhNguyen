@@ -14,6 +14,11 @@ public class TaiKhoan implements Serializable{
     public TaiKhoan() {
     }
 
+    public TaiKhoan(String TenDN, String MatKhau) {
+        this.TenDN = TenDN;
+        this.MatKhau = MatKhau;
+    }
+
     public TaiKhoan(String TenDN, String MatKhau, int QuyenTruyCap) {
         this.TenDN = TenDN;
         this.MatKhau = MatKhau;
