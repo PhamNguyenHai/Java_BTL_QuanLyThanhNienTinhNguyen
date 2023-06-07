@@ -27,19 +27,28 @@ public class Models implements Serializable{
     }
     
     public void Import() throws Exception {
-    FileInputStream fi = new FileInputStream("DATA.TXT");
-    ObjectInputStream ois = new ObjectInputStream(fi);
-    Models importedData = (Models) ois.readObject();
-    fi.close();
-    ois.close();
+        FileInputStream fi = new FileInputStream("DATA.TXT");
+        ObjectInputStream ois = new ObjectInputStream(fi);
+        Models importedData = (Models) ois.readObject();
+        fi.close();
+        ois.close();
     
     // Gán các danh sách từ đối tượng importedData cho đối tượng hiện tại
-    this.ListPhongVans = importedData.ListPhongVans;
-    this.ListSinhViens = importedData.ListSinhViens;
-    this.ListTaiKhoans = importedData.ListTaiKhoans;
-    this.ListHoatDongs = importedData.ListHoatDongs;
-    this.ListLops = importedData.ListLops;
-}
+        this.ListPhongVans = importedData.ListPhongVans;
+        this.ListSinhViens = importedData.ListSinhViens;
+        this.ListTaiKhoans = importedData.ListTaiKhoans;
+        this.ListHoatDongs = importedData.ListHoatDongs;
+        this.ListLops = importedData.ListLops;
+    }
+    
+//    public static Models ImportData() throws Exception {
+//    FileInputStream fi = new FileInputStream("DATA.TXT");
+//    ObjectInputStream ois = new ObjectInputStream(fi);
+//    Models importedData = (Models)ois.readObject();
+//    fi.close();
+//    ois.close();
+//    return importedData;
+//    }
     
     public void SaveChange() throws Exception{
         FileOutputStream fs = new FileOutputStream("DATA.TXT");

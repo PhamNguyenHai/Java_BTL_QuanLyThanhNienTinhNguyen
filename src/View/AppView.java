@@ -4,6 +4,8 @@
  */
 package View;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author ADMIN
@@ -27,21 +29,26 @@ public class AppView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnDangNhap = new javax.swing.JButton();
+        btnDkiSVTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Thanh niên tình nguyện");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton1.setText("Đăng nhập");
-
-        jButton2.setText("Đăng ký phỏng vấn SV tình nguyện");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnDangNhap.setText("Đăng nhập");
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnDangNhapActionPerformed(evt);
+            }
+        });
+
+        btnDkiSVTN.setText("Đăng ký phỏng vấn SV tình nguyện");
+        btnDkiSVTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDkiSVTNActionPerformed(evt);
             }
         });
 
@@ -51,11 +58,11 @@ public class AppView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(278, 278, 278)
-                            .addComponent(jButton2))
+                            .addComponent(btnDkiSVTN))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(182, 182, 182)
                             .addComponent(jLabel1))))
@@ -67,18 +74,28 @@ public class AppView extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
                 .addGap(97, 97, 97)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(btnDkiSVTN)
                 .addContainerGap(141, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnDkiSVTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDkiSVTNActionPerformed
+        DangKyView dangKiView = new DangKyView();
+        dangKiView.setLocationRelativeTo(null);
+        dangKiView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        dangKiView.setVisible(true);
+    }//GEN-LAST:event_btnDkiSVTNActionPerformed
+
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        DangNhapView dnv = new DangNhapView();
+        dnv.setLocationRelativeTo(null);
+        dnv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        dnv.setVisible(true);
+    }//GEN-LAST:event_btnDangNhapActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,8 +133,8 @@ public class AppView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnDangNhap;
+    private javax.swing.JButton btnDkiSVTN;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
