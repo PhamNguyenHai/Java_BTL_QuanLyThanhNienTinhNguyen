@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * @author hai
  */
 public class Models implements Serializable{
-    ArrayList<PhongVan> ListPhongVans;
-    ArrayList<SinhVien> ListSinhViens;
-    ArrayList<TaiKhoan> ListTaiKhoans;
-    ArrayList<HoatDong> ListHoatDongs;
-    ArrayList<Lop> ListLops;
+    public ArrayList<PhongVan> ListPhongVans;
+    public ArrayList<SinhVien> ListSinhViens;
+    public ArrayList<TaiKhoan> ListTaiKhoans;
+    public ArrayList<HoatDong> ListHoatDongs;
+    public ArrayList<Lop> ListLops;
 
     public Models() {
         ListHoatDongs = new ArrayList<HoatDong>();

@@ -12,7 +12,7 @@ public class PhongVan implements Serializable{
     LocalDate NgayPV;
     String PhongPV;
     int SoLuong;
-    int SoLuongThamGia = 0;
+    int SoLuongThamGia = 0; 
 
     public PhongVan() {
     }

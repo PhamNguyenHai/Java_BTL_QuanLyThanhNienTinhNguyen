@@ -4,6 +4,8 @@
  */
 package View;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author thong
@@ -39,6 +41,11 @@ public class TrangChu extends javax.swing.JFrame {
         jLabel1.setText("TRANG CHỦ");
 
         jButton1.setText("LỊCH ĐĂNG KÝ SINH VIÊN TÌNH NGUYỆN");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("DANH SÁCH ĐĂNG KÝ");
 
@@ -92,6 +99,14 @@ public class TrangChu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DangKyLichPhongVanView_ADMIN n= new DangKyLichPhongVanView_ADMIN();
+        n.setLocationRelativeTo(null);
+        n.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        n.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -138,4 +153,8 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    Object getInstance() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
