@@ -23,6 +23,11 @@ public class DangNhapView extends javax.swing.JFrame {
     Models model = new Models();
     public DangNhapView() {
         initComponents();
+        try{
+            model.Import();
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
     }
 
     /**
@@ -114,7 +119,8 @@ public class DangNhapView extends javax.swing.JFrame {
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         try{
-               model.Import();
+               
+//                model = Models.ImportData();
 //               String kq = "";
 //               for(TaiKhoan i : model.getListTaiKhoans())
 //                   kq += i.getTenDN() + " | " + i.getMatKhau();
