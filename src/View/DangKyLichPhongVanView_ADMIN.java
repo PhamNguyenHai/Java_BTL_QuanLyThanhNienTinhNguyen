@@ -5,6 +5,7 @@
 package View;
 
 import com.toedter.calendar.JDateChooser;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,6 +41,12 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
         }
     }
 
+    public void pt_XuatFileExcel(JTable table) throws IOException {
+//        Workbook workbook = new XSSFWorkbook();
+//        Sheet sheet = workbook.createSheet("People");
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,7 +68,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         themBtn = new javax.swing.JButton();
         xoa = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        thongKeBtn = new javax.swing.JButton();
         thoat = new javax.swing.JButton();
         txtNgayPV = new com.toedter.calendar.JDateChooser();
 
@@ -126,10 +133,10 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Thống kê");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        thongKeBtn.setText("Thống kê");
+        thongKeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                thongKeBtnActionPerformed(evt);
             }
         });
 
@@ -167,7 +174,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
                                     .addComponent(txtNgayPV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(themBtn)
                             .addComponent(xoa)
-                            .addComponent(jButton3)
+                            .addComponent(thongKeBtn)
                             .addComponent(thoat)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -206,7 +213,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(xoa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addComponent(thongKeBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(thoat)))
                 .addContainerGap(64, Short.MAX_VALUE))
@@ -215,9 +222,10 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void thongKeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thongKeBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+
+    }//GEN-LAST:event_thongKeBtnActionPerformed
 
     private void thoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thoatActionPerformed
         // TODO add your handling code here:
@@ -307,7 +315,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
         int dem = 0;
         for (PhongVan i : dsPV_sort) {
             modelTable.addRow(new Object[]{
-                ++dem, i.getNgayPV(), i.getPhongPV(), i.getSoLuong()
+                ++dem, i.getNgayPV(), i.getPhongPV(), i.getSoLuongThamGia() + "/" + i.getSoLuong()
             });
         }
 
@@ -319,7 +327,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
         int dem = 0;
         for (PhongVan i : model.getListPhongVans()) {
             modelTable.addRow(new Object[]{
-                ++dem, i.getNgayPV(), i.getPhongPV(), i.getSoLuongThamGia() + "/" +i.getSoLuong()
+                ++dem, i.getNgayPV(), i.getPhongPV(), i.getSoLuongThamGia() + "/" + i.getSoLuong()
             });
         }
     }
@@ -367,7 +375,6 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbSapXep;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -377,6 +384,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
     private javax.swing.JTable tableLichDangKy_Admin;
     private javax.swing.JButton themBtn;
     private javax.swing.JButton thoat;
+    private javax.swing.JButton thongKeBtn;
     private com.toedter.calendar.JDateChooser txtNgayPV;
     private javax.swing.JTextField txtPhong;
     private javax.swing.JTextField txtSoLuong;
