@@ -96,5 +96,10 @@ public class Models implements Serializable{
 
     public ArrayList<Lop> getListLops() {
         return ListLops;
-    }    
+    }  
+    
+    public String getNewMaHD(){
+        int Max = Integer.parseInt(ListHoatDongs.get(ListHoatDongs.size() - 1).getMaHD().replace("HD", ""));
+        return "HD" + Max;
+    }
 }
