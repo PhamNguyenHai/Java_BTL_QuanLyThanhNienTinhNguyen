@@ -119,12 +119,6 @@ public class DangNhapView extends javax.swing.JFrame {
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         try{
-               
-//                model = Models.ImportData();
-//               String kq = "";
-//               for(TaiKhoan i : model.getListTaiKhoans())
-//                   kq += i.getTenDN() + " | " + i.getMatKhau();
-//               txtUsername.setText(kq);
             if(txtPassword.getPassword().equals("") || txtUsername.getText().equals(""))
                 throw new Exception("Vui lòng nhập đủ user name và password");
 
