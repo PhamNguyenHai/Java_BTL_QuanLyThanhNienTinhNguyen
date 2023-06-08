@@ -1,13 +1,39 @@
 package View;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import qlsinhvientinhnguyen.*;
 
 public class DSHoatDongThamGia extends javax.swing.JFrame {
 
+    Models model = new Models();
+
     public DSHoatDongThamGia() {
         initComponents();
+        try {
+            model.Import();
+            ArrayList<SinhVienTinhNguyen> dssvtn = new ArrayList<SinhVienTinhNguyen>();
+            for (SinhVien i : model.getListSinhViens()) {
+                if (i instanceof SinhVienTinhNguyen) {
+                    dssvtn.add((SinhVienTinhNguyen) i);
+                }
+            }
 
+            loadTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
+    public void loadTable() {
+        DefaultTableModel modelTable = (DefaultTableModel) DSHoatDongTable.getModel();
+        int dem = 0;
+        for (HoatDong i : model.getListHoatDongs()) {
+            modelTable.addRow(new Object[]{
+                ++dem, i.getTenHD(), i.getNgayBatDau(), i.getMoTa(), i.getNguoiQuanLy(), i.getChiPhiHoTro()
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -16,11 +42,12 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbldg = new javax.swing.JTable();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         btnQuayLai = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        DSHoatDongTable = new javax.swing.JTable();
+        btndanhgiahd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1200, 600));
@@ -29,43 +56,22 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
         jLabel1.setText("Danh sách hoạt động tham gia");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Nhập thông tin: ");
+        jLabel2.setText("Nhập tên hoạt động: ");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtSearchActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Tìm kiếm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnSearch.setText("Tìm kiếm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
-
-        tbldg.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "STT", "Hoạt động", "Ngày bắt đầu", "Mô tả", "Người quản lý", "Chi phí hỗ trợ", "Đánh giá hoạt động"
-            }
-        ));
-        jScrollPane1.setViewportView(tbldg);
-        if (tbldg.getColumnModel().getColumnCount() > 0) {
-            tbldg.getColumnModel().getColumn(0).setPreferredWidth(5);
-            tbldg.getColumnModel().getColumn(2).setPreferredWidth(40);
-        }
 
         btnQuayLai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnQuayLai.setText("Quay lại");
@@ -75,14 +81,42 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
             }
         });
 
+        DSHoatDongTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "Hoạt động", "Ngày bắt đầu", "Mô tả", "Người quản lý", "Chi phí hỗ trợ"
+            }
+        ));
+        jScrollPane2.setViewportView(DSHoatDongTable);
+        if (DSHoatDongTable.getColumnModel().getColumnCount() > 0) {
+            DSHoatDongTable.getColumnModel().getColumn(0).setMinWidth(50);
+            DSHoatDongTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+            DSHoatDongTable.getColumnModel().getColumn(0).setMaxWidth(70);
+        }
+
+        btndanhgiahd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btndanhgiahd.setText("Đánh giá hoạt động");
+        btndanhgiahd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndanhgiahdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnQuayLai)
-                .addGap(93, 93, 93))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1005, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(btnQuayLai)))
+                .addContainerGap(42, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -90,11 +124,12 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
-                .addContainerGap(629, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+                        .addComponent(btnSearch)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btndanhgiahd)
+                .addGap(104, 104, 104))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,32 +138,60 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btndanhgiahd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
                 .addComponent(btnQuayLai)
-                .addContainerGap())
+                .addGap(55, 55, 55))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtSearchActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String keyword = txtSearch.getText().trim(); // Lấy từ khóa tìm kiếm từ JTextField và loại bỏ khoảng trắng thừa
+
+        DefaultTableModel modelTable = (DefaultTableModel) DSHoatDongTable.getModel();
+        modelTable.setRowCount(0); // Xóa tất cả các dòng trong bảng trước khi tìm kiếm
+
+        int dem = 0;
+        boolean foundResult = false;
+        for (HoatDong i : model.getListHoatDongs()) {
+            if (i.getTenHD().toLowerCase().contains(keyword.toLowerCase())) {
+                // Nếu tên hoạt động chứa từ khóa tìm kiếm (không phân biệt chữ hoa, chữ thường)
+                modelTable.addRow(new Object[]{
+                    ++dem, i.getTenHD(), i.getNgayBatDau(), i.getMoTa(), i.getNguoiQuanLy(), i.getChiPhiHoTro()
+                });
+                foundResult = true;
+            }
+        }
+
+        if (!foundResult) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy kết quả phù hợp.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
         // TODO add your handling code here:
         new TrangChuSV().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnQuayLaiActionPerformed
+
+    private void btndanhgiahdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndanhgiahdActionPerformed
+        // TODO add your handling code here:
+        DanhGiaHoatDong dghd = new DanhGiaHoatDong();
+        dghd.setLocationRelativeTo(null);
+        dghd.setVisible(true);
+    }//GEN-LAST:event_btndanhgiahdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,12 +229,13 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable DSHoatDongTable;
     private javax.swing.JButton btnQuayLai;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btndanhgiahd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tbldg;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

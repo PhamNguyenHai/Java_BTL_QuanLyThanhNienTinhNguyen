@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import qlsinhvientinhnguyen.DanhGia;
 
 public class DanhGiaHoatDong extends javax.swing.JFrame {
 
@@ -19,7 +20,7 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,7 +46,7 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
         jLabel1.setText("Đánh giá hoạt động");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Điểm đánh giá: ");
+        jLabel2.setText("Điểm đánh giá (Từ 1 đến 5): ");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Nội dung: ");
@@ -84,7 +85,7 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                         .addGap(174, 174, 174))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(diemDG, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,19 +127,27 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
 
     private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
         // TODO add your handling code here:
+        int soSaoDanhGia;
+        String noiDungDanhGia;
+
         try {
-            if (Double.parseDouble(diemDG.getText()) < 0 || Double.parseDouble(diemDG.getText()) > 5) {
-                jLabel1.setForeground(Color.red);
-                JOptionPane.showMessageDialog(null, "Điểm đánh giá phải nằm trong khoảng từ 0 đến 5!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            } else if ("".equals(txtnd.getText())) {
-                jLabel2.setForeground(Color.red);
-                JOptionPane.showMessageDialog(null, "Vui lòng nhập đóng góp!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Đánh giá của bạn đã gửi thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.toString());
+            soSaoDanhGia = Integer.parseInt(diemDG.getText());
+            noiDungDanhGia = txtnd.getText();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số cho điểm đánh giá.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        if (soSaoDanhGia <= 0 || soSaoDanhGia >= 5) {
+            JOptionPane.showMessageDialog(this, "Điểm đánh giá phải là số từ 1 đến 4.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        DanhGia danhGia = new DanhGia(soSaoDanhGia, noiDungDanhGia);
+        JOptionPane.showMessageDialog(this, "Đánh giá đã được gửi thành công.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+
+        diemDG.setText("");
+        txtnd.setText("");
     }//GEN-LAST:event_btnGuiActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed

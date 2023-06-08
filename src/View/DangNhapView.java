@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import qlsinhvientinhnguyen.Models;
 import qlsinhvientinhnguyen.TaiKhoan;
-import qlsvtinhnguyen.TrangChuSV;
+//import qlsvtinhnguyen.TrangChuSV;
 
 /**
  *
