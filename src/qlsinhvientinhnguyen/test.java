@@ -4,13 +4,25 @@
  */
 package qlsinhvientinhnguyen;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 /**
  *
  * @author ADMIN
  */
-public class test extends Models{
-    Models md = new Models();
-    public void main (String[] args) throws Exception {
-        md.SaveChange();
+public class test extends Models {
+
+    Models model = new Models();
+
+
+    public void main (String[] args) {
+        try {
+            model.Import();
+            
+        } catch (Exception e) {
+            
+        }
     }
-} 
+  
+}

@@ -17,6 +17,8 @@ import qlsinhvientinhnguyen.Models;
 import qlsinhvientinhnguyen.PhongVan;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import qlsinhvientinhnguyen.SinhVien;
+import qlsinhvientinhnguyen.SinhVienPhongVan;
 
 /**
  *
@@ -26,6 +28,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
 
     Models model = new Models();
     PhongVan pv = new PhongVan();
+    ArrayList<SinhVienPhongVan> listSVPhongVan = new ArrayList<>();
     int dong = -1;
 
     /**
@@ -33,6 +36,31 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
      */
     public DangKyLichPhongVanView_ADMIN() {
         initComponents();
+        // Test 
+        try {
+            model.Import();
+            for (SinhVien sv : model.getListSinhViens()) {
+                if (sv instanceof SinhVienPhongVan) {
+                    listSVPhongVan.add((SinhVienPhongVan) sv);
+                }
+            }
+            ArrayList<PhongVan> listPhongVan = model.getListPhongVans();
+            PhongVan pvTest = listPhongVan.get(0);
+            PhongVan pvTest1 = listPhongVan.get(1);
+
+            listSVPhongVan.get(0).setPhongVan(pvTest);
+            listSVPhongVan.get(1).setPhongVan(pvTest1);
+            listSVPhongVan.get(2).setPhongVan(pvTest);
+
+            for (SinhVienPhongVan i : listSVPhongVan) {
+                System.out.println("Ma SV: " + i.getMaSV());
+                System.out.println("Ma SV: " + i.getPhongVan().getMaPV());
+            }
+
+        } catch (Exception e) {
+
+        }
+
         try {
             model.Import();
             loadTableLichDangKy();

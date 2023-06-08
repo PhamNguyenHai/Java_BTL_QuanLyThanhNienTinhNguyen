@@ -23,4 +23,33 @@ public class SinhVienPhongVan extends SinhVien implements Serializable{
     public void setPhongVan(PhongVan PhongVan) {
         this.PhongVan = PhongVan;
     }
+
+    public String getMaSV() {
+        return MaSV;
+    }
+
+    public String getTenSV() {
+        return TenSV;
+    }
+
+    public qlsinhvientinhnguyen.Lop getLop() {
+        return Lop;
+    }
+
+    public String getSDT() {
+        return SDT;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public qlsinhvientinhnguyen.TaiKhoan getTaiKhoan() {
+        return TaiKhoan;
+    }
+
+    public void setTaiKhoan(qlsinhvientinhnguyen.TaiKhoan TaiKhoan) {
+        this.TaiKhoan = TaiKhoan;
+    }
+    
 }
