@@ -15,7 +15,7 @@ public class HoatDong implements Serializable{
     String MoTa;
     String NguoiQuanLy;
     double ChiPhiHoTro;
-    ArrayList<SinhVienTinhNguyen> DSSinhVienThamGia;
+    ArrayList<SinhVienTinhNguyen> DSSinhVienThamGia = new ArrayList<SinhVienTinhNguyen>();
 
     public HoatDong() {
     }
