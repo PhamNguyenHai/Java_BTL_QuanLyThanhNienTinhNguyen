@@ -7,19 +7,15 @@ package View;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import qlsinhvientinhnguyen.Models;
 import qlsinhvientinhnguyen.SinhVien;
+import qlsinhvientinhnguyen.SinhVienPhongVan;
 import qlsinhvientinhnguyen.SinhVienTinhNguyen;
 
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 /**
  *
  * @author ADMIN
@@ -29,38 +25,51 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
     /**
      * Creates new form QuanLySinhVienTinhNguyenView_ADMIN
      */
-   
     Models model = new Models();
     ArrayList<SinhVienTinhNguyen> svtn = new ArrayList<SinhVienTinhNguyen>();
-    int dongChon =-1;
+    int dongChon = -1;
     int dongSelect = -1;
+
     public QuanLySinhVienTinhNguyenView_ADMIN() {
         initComponents();
-        try{
+        try {
             model.Import();
-            for(SinhVien i : model.getListSinhViens())
-                if(i instanceof SinhVienTinhNguyen)
-                    svtn.add((SinhVienTinhNguyen)i);
-            
+            load_SVTN_Local();
+
             loadTable();
-        }catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
-    public void loadTable(){
-        DefaultTableModel modelTable =  (DefaultTableModel)tb_dssvtn.getModel();
+
+    private void load_SVTN_Local() {
+        try {
+            for (SinhVien i : model.getListSinhViens()) {
+                if (i instanceof SinhVienTinhNguyen) {
+                    SinhVienTinhNguyen svTinhNguyen = (SinhVienTinhNguyen) i;
+                    svtn.add(svTinhNguyen);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+
+    public void loadTable() {
+        DefaultTableModel modelTable = (DefaultTableModel) tb_dssvtn.getModel();
         modelTable.setRowCount(0);
         int dem = 0;
-        
-        for(SinhVien i : model.getListSinhViens()){ 
-            if(i instanceof SinhVienTinhNguyen){
-            modelTable.addRow(new Object[]{
-                ++dem, i.getMaSV(), i.getTenSV() ,  i.getLop().getTenLop(),i.getLop().getKhoa(),
-                        i.getLop().getNienKhoa(), i.getSDT(),i.getMaSV(),((SinhVienTinhNguyen) i).getVaiTro()
-            });
+
+        for (SinhVien i : model.getListSinhViens()) {
+            if (i instanceof SinhVienTinhNguyen) {
+                modelTable.addRow(new Object[]{
+                    ++dem, i.getMaSV(), i.getTenSV(), i.getLop().getTenLop(), i.getLop().getKhoa(),
+                    i.getLop().getNienKhoa(), i.getSDT(), i.getMaSV(), ((SinhVienTinhNguyen) i).getVaiTro()
+                });
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,6 +92,8 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         cb_vaiTro = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,6 +167,11 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
         });
 
         jButton6.setText("Thoát");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         cb_vaiTro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thành viên", "Nhóm trưởng" }));
         cb_vaiTro.addActionListener(new java.awt.event.ActionListener() {
@@ -164,37 +180,48 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Làm mới");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Vai trò");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_tenSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bt_search)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(cb_Loc, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(418, 418, 418)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_tenSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bt_search)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(cb_Loc, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)
-                            .addComponent(jButton6)
-                            .addComponent(cb_vaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(jButton3)
+                    .addComponent(cb_vaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4)
+                    .addComponent(jButton1)
+                    .addComponent(jButton6))
+                .addGap(0, 26, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(418, 418, 418)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,17 +237,21 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
                     .addComponent(cb_Loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_vaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4)
-                        .addGap(13, 13, 13)
-                        .addComponent(cb_vaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6)))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton6))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
 
@@ -233,8 +264,8 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
 
     private void bt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_searchActionPerformed
         // TODO add your handling code here:                                          
-    // TODO add your handling code here:
-            ArrayList<SinhVienTinhNguyen> lsDHSearch = new ArrayList<>();
+        // TODO add your handling code here:
+        ArrayList<SinhVienTinhNguyen> lsDHSearch = new ArrayList<>();
         try {
             String maDHS = txt_tenSearch.getText();
             for (SinhVienTinhNguyen i : svtn) {
@@ -290,76 +321,70 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.toString(), "Thong bao", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_cb_LocActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         dongChon = tb_dssvtn.getSelectedRow();
-        try{
-        if (dongChon != -1) {
+        try {
+            if (dongChon != -1) {
                 if (JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa ?", "Thong bao", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
-                    svtn.remove(dongChon);
-                    JOptionPane.showMessageDialog(this, "Xóa sinh viên tình nguyện thành công", "Thông báo", WIDTH);
-                    DefaultTableModel modelTable = (DefaultTableModel) tb_dssvtn.getModel();    
-                    model.SaveChange();
-                    modelTable.setRowCount(0);
-                    int dem = 0;
-                    for (SinhVienTinhNguyen i : svtn) {
-                        modelTable.addRow(new Object[]{
-                            ++dem, i.getMaSV(), i.getTenSV(), i.getLop().getTenLop(), i.getLop().getKhoa(),
-                            i.getLop().getNienKhoa(), i.getSDT(), i.getMaSV(), i.getVaiTro()
-                        });
+                    Iterator<SinhVien> iterator = model.ListSinhViens.iterator();
+                    while (iterator.hasNext()) {
+
+                        SinhVien sv = iterator.next();
+                        if (sv instanceof SinhVienTinhNguyen) {
+
+                            SinhVienTinhNguyen svTinhNguyen = (SinhVienTinhNguyen) sv;
+
+                            if (svTinhNguyen.getMaSV().equals(svtn.get(dongChon).getMaSV())) {
+
+                                iterator.remove();
+                                System.out.println(model.getListSinhViens().size());
+                                model.SaveChange();
+                                updateDB_Local();
+
+                                clearTable();
+                                int dem = 0;
+                                DefaultTableModel modelTable = (DefaultTableModel) tb_dssvtn.getModel();
+                                for (SinhVienTinhNguyen i : svtn) {
+                                    modelTable.addRow(new Object[]{
+                                        ++dem, i.getMaSV(), i.getTenSV(), i.getLop().getTenLop(), i.getLop().getKhoa(),
+                                        i.getLop().getNienKhoa(), i.getSDT(), i.getMaSV(), i.getVaiTro()
+                                    });
+                                }
+                                break;
+                            }
+                        }
                     }
                 }
-        } else {
-            JOptionPane.showMessageDialog(this,
-                    "Chưa chọn dòng xóa", "Thông báo", WIDTH);
-        }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error: " + e.toString(), "Thong bao", JOptionPane.ERROR_MESSAGE);
-        }   
-    }//GEN-LAST:event_jButton2ActionPerformed
-    
-    Workbook workbook = new XSSFWorkbook();
-    Sheet sheet = workbook.createSheet("QL_SVTN");
-    
-    public void pt_XuatFileExcel(JTable table) throws IOException {
-
-        // tạo tên cột 
-        Row headerRow = sheet.createRow(0);
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            Cell headerCell = headerRow.createCell(i);
-            headerCell.setCellValue(table.getColumnName(i));
-            // tạo font chữ đận cho tên cột 
-            org.apache.poi.ss.usermodel.Font font = workbook.createFont();
-            font.setBold(true);
-            org.apache.poi.ss.usermodel.CellStyle style = workbook.createCellStyle();
-            style.setFont(font);
-            headerCell.setCellStyle(style);
-        }
-
-        // thêm dữ liệu trong jtable vào trong file
-        for (int i = 0; i < table.getRowCount(); i++) {
-            Row row = sheet.createRow(i + 1);
-            for (int j = 0; j < table.getColumnCount(); j++) {
-                Cell cell = row.createCell(j);
-                cell.setCellValue(table.getValueAt(i, j).toString());
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Chưa chọn dòng xóa", "Thông báo", WIDTH);
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.toString(), "Thong bao", JOptionPane.ERROR_MESSAGE);
         }
-        FileOutputStream fileOut = new FileOutputStream("QL_SVTN.xlsx");
-        workbook.write(fileOut);
-        fileOut.close();
-        JOptionPane.showMessageDialog(null, "Đã xuất ra file: QL_SVTN.xlsx");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void clearTable() {
+        DefaultTableModel modelTable = (DefaultTableModel) tb_dssvtn.getModel();
+        modelTable.setRowCount(0);
     }
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+
+    public void updateDB_Local() {
         try {
-            // TODO add your handling code here:
-            pt_XuatFileExcel(tb_dssvtn);
-        } catch (IOException ex) {
-            JOptionPane.showConfirmDialog(null, ex.toString());
+            model.Import();
+            svtn = new ArrayList<>();
+            load_SVTN_Local();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
         }
+    }
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -373,22 +398,38 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
         // TODO add your handling code here:
         dongSelect = tb_dssvtn.getSelectedRow();
         String vaiTroChon = (String) cb_vaiTro.getSelectedItem();
-        try{
-        if(dongSelect!=-1){
-            SinhVienTinhNguyen sv = svtn.get(dongSelect);
-            sv.setVaiTro(vaiTroChon);
-            DefaultTableModel modelTable = (DefaultTableModel) tb_dssvtn.getModel();
-            modelTable.setValueAt(vaiTroChon, dongSelect, 8); // Cột 8 là cột vai trò trong bảng
-            model.SaveChange();
-        // Hiển thị thông báo thành công
-        JOptionPane.showMessageDialog(this, "Thay đổi vai trò thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Chưa chọn sinh viên", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        try {
+            if (dongSelect != -1) {
+                SinhVienTinhNguyen sv = svtn.get(dongSelect);
+                sv.setVaiTro(vaiTroChon);
+                DefaultTableModel modelTable = (DefaultTableModel) tb_dssvtn.getModel();
+                modelTable.setValueAt(vaiTroChon, dongSelect, 8); // Cột 8 là cột vai trò trong bảng
+                model.SaveChange();
+                // Hiển thị thông báo thành công
+                JOptionPane.showMessageDialog(this, "Thay đổi vai trò thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Chưa chọn sinh viên", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.toString(), "Thong bao", JOptionPane.ERROR_MESSAGE);
         }
-        }catch(Exception e){
-        JOptionPane.showMessageDialog(null, "Error: " + e.toString(), "Thong bao", JOptionPane.ERROR_MESSAGE);
-        }  
     }//GEN-LAST:event_cb_vaiTroActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         try {
+            model.Import();
+            clearTable();
+            loadTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,6 +470,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
     private javax.swing.JButton bt_search;
     private javax.swing.JComboBox<String> cb_Loc;
     private javax.swing.JComboBox<String> cb_vaiTro;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -436,6 +478,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tb_dssvtn;
     private javax.swing.JTextField txt_tenSearch;

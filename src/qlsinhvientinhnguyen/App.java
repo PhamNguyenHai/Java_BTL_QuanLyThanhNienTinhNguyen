@@ -18,7 +18,7 @@ public class App {
         
         ArrayList<PhongVan> ListPV = new ArrayList<PhongVan>();
         ListPV.add(new PhongVan("PV01", LocalDate.of(2023, 3, 5), "305 - A10", 10));
-        ListPV.add(new PhongVan("PV02", LocalDate.of(2023, 5, 8), "305 - A10", 5));
+    ListPV.add(new PhongVan("PV02", LocalDate.of(2023, 5, 8), "305 - A10", 5));
         
         
         ArrayList<TaiKhoan> ListTK = new ArrayList<TaiKhoan>();
@@ -32,11 +32,11 @@ public class App {
         ArrayList<SinhVien> ListSV = new ArrayList<SinhVien>();
         ListSV.add(new SinhVienTinhNguyen("SV01", "Nguyễn Ngọc Xuân",   ListLop.get(0), "0325524413", "xuannn@gmail.com",       ListTK.get(1), "Thành viên"));
         ListSV.add(new SinhVienPhongVan  ("SV02", "Trần Anh Tuyền",     ListLop.get(1), "0543524512", "anhtuyen@gmail.com",     null));
-        ListSV.add(new SinhVienTinhNguyen("SV03", "Phạm Xuân Long",     ListLop.get(2), "0343523134", "long@gmail.com",         ListTK.get(1), "Thành viên"));
-        ListSV.add(new SinhVienTinhNguyen("SV04", "Hà Thanh Huyền",     ListLop.get(3), "0235524454", "thanhhuyen@gmail.com",   ListTK.get(1), "Thành viên"));
+        ListSV.add(new SinhVienTinhNguyen("SV03", "Phạm Xuân Long",     ListLop.get(2), "0343523134", "long@gmail.com",         ListTK.get(2), "Thành viên"));
+        ListSV.add(new SinhVienTinhNguyen("SV04", "Hà Thanh Huyền",     ListLop.get(3), "0235524454", "thanhhuyen@gmail.com",   ListTK.get(3), "Thành viên"));
         ListSV.add(new SinhVienPhongVan  ("SV05", "Phạm Tuấn Anh",      ListLop.get(3), "0225532417", "letgo@gmail.com",        null));
         ListSV.add(new SinhVienPhongVan  ("SV06", "Hoàng Văn Ngọc",     ListLop.get(2), "0924524416", "ngochoang@gmail.com",    null));
-        ListSV.add(new SinhVienTinhNguyen("SV07", "Trần Đức Đạt",       ListLop.get(1), "0334525410", "ducdat342@gmail.com",    ListTK.get(1), "Thành viên"));
+        ListSV.add(new SinhVienTinhNguyen("SV07", "Trần Đức Đạt",       ListLop.get(1), "0334525410", "ducdat342@gmail.com",    ListTK.get(4), "Thành viên"));
         ListSV.add(new SinhVienPhongVan  ("SV08", "Đào Thị Thảo",    ListLop.get(2), "0325524311", "daothithao@gmail.com",    null));
         ListSV.add(new SinhVienPhongVan  ("SV09", "Lưu Tuấn Thành",    ListLop.get(1), "0325524311", "tuanthanh@gmail.com",    null));
         ListSV.add(new SinhVienPhongVan  ("SV10", "Phạm Nguyễn Nguyên Hải",    ListLop.get(0), "0325524311", "nguyenhai@gmail.com",    null));

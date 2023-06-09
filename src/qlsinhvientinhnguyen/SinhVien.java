@@ -73,4 +73,5 @@ public abstract class SinhVien implements Serializable{
     public void setTaiKhoan(TaiKhoan TaiKhoan) {
         this.TaiKhoan = TaiKhoan;
     }
+    
 }
