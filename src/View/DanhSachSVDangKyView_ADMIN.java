@@ -39,12 +39,11 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
             model.Import();
             dsSVPV_local = new ArrayList<>();
             dsSVTN_local = new ArrayList<>();
-            fakeData_PhongVan();
             load_SVPV_Local();
             load_SVTN_Local();
             loadTableLichDangKy(dsSVPV_local);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.toString());
+            
         }
     }
 

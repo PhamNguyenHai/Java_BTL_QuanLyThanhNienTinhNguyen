@@ -27,12 +27,7 @@ public class SinhVienPhongVan extends SinhVien implements Serializable{
     public void setPhongVan(PhongVan PhongVan) {
         this.PhongVan = PhongVan;
     }
-
-<<<<<<< HEAD
-    public void setPhongVan(ArrayList<SinhVien> svpv) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-=======
+    
     public String getMaSV() {
         return MaSV;
     }
@@ -60,6 +55,4 @@ public class SinhVienPhongVan extends SinhVien implements Serializable{
     public void setTaiKhoan(qlsinhvientinhnguyen.TaiKhoan TaiKhoan) {
         this.TaiKhoan = TaiKhoan;
     }
-    
->>>>>>> thanh_QuanLySVTN_LichDkySVTN
 }
