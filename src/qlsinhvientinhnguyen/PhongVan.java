@@ -17,6 +17,10 @@ public class PhongVan implements Serializable{
     public PhongVan() {
     }
 
+    public void setSoLuongThamGia(int SoLuongThamGia) {
+        this.SoLuongThamGia = SoLuongThamGia;
+    }
+
     public PhongVan(String MaPV, LocalDate NgayPV, String PhongPV, int SoLuong) {
         this.MaPV = MaPV;
         this.NgayPV = NgayPV;

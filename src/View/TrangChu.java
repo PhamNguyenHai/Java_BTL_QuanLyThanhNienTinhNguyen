@@ -30,7 +30,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnDSDangKy = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -47,7 +47,12 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("DANH SÁCH ĐĂNG KÝ");
+        btnDSDangKy.setText("DANH SÁCH ĐĂNG KÝ");
+        btnDSDangKy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDSDangKyActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("QUẢN LÝ SINH VIÊN TÌNH NGUYỆN");
 
@@ -64,7 +69,7 @@ public class TrangChu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDSDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1))
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,7 +94,7 @@ public class TrangChu extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDSDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -106,6 +111,14 @@ public class TrangChu extends javax.swing.JFrame {
         n.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         n.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnDSDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDSDangKyActionPerformed
+        // TODO add your handling code here:
+        DanhSachSVDangKyView_ADMIN n= new DanhSachSVDangKyView_ADMIN();
+        n.setLocationRelativeTo(null);
+        n.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        n.setVisible(true);
+    }//GEN-LAST:event_btnDSDangKyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,8 +159,8 @@ public class TrangChu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDSDangKy;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

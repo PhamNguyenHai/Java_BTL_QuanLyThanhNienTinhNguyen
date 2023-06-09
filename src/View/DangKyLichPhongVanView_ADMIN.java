@@ -5,6 +5,7 @@
 package View;
 
 import com.toedter.calendar.JDateChooser;
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,13 +13,20 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import qlsinhvientinhnguyen.Models;
 import qlsinhvientinhnguyen.PhongVan;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import qlsinhvientinhnguyen.SinhVien;
 import qlsinhvientinhnguyen.SinhVienPhongVan;
+
+
 
 /**
  *
@@ -39,6 +47,8 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
         // Test 
         try {
             model.Import();
+            loadTableLichDangKy();
+
             for (SinhVien sv : model.getListSinhViens()) {
                 if (sv instanceof SinhVienPhongVan) {
                     listSVPhongVan.add((SinhVienPhongVan) sv);
@@ -57,13 +67,6 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
                 System.out.println("Ma SV: " + i.getPhongVan().getMaPV());
             }
 
-        } catch (Exception e) {
-
-        }
-
-        try {
-            model.Import();
-            loadTableLichDangKy();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
@@ -360,6 +363,21 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
         }
     }
 
+    public void thongke() {
+       try {
+           Workbook wb = new XSSFWorkbook();
+           Sheet sheet = (Sheet) wb.createSheet("DSLichDangKyPV");
+           
+           int rowCount = 0;
+           for(SinhVien i : model.getListSinhViens()) {
+//               Row row = sheet.createRow(rowCount++);
+           }
+           
+       }
+       catch (Exception e) {
+           
+       }
+    }
     // Xóa toàn bộ các hàng của bảng
     public void clearTable() {
         DefaultTableModel modelTable = (DefaultTableModel) tableLichDangKy_Admin.getModel();
