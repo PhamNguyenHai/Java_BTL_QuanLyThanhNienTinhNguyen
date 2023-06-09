@@ -55,7 +55,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
             for (SinhVien i : model.getListSinhViens()) {
                 if (i instanceof SinhVienPhongVan) {
                     SinhVienPhongVan svPhongVan = (SinhVienPhongVan) i;
-                    if(svPhongVan.getPhongVan() != null) {
+                    if (svPhongVan.getPhongVan() != null) {
                         dsSVPV_local.add(svPhongVan);
                     }
                 }
@@ -290,13 +290,6 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
 
                             iterator.remove();
                             model.ListSinhViens.add(svpv);
-                            for (PhongVan pv : model.getListPhongVans()) {
-                                if (pv.getNgayPV().equals(svpv_acp.getPhongVan().getNgayPV())) {
-                                    System.out.println(pv.getSoLuongThamGia());
-                                    soLuongThamGia = pv.getSoLuongThamGia();
-                                    pv.setSoLuongThamGia(--soLuongThamGia);
-                                }
-                            }
                             model.SaveChange();
                             updateDB_Local();
 
@@ -322,8 +315,13 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-        clearTable();
-        loadTableLichDangKy(dsSVPV_local);
+        try {
+            updateDB_Local();
+            clearTable();
+            loadTableLichDangKy(dsSVPV_local);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -334,6 +332,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
     private void cbSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSapXepActionPerformed
         // TODO add your handling code here:
         ArrayList<SinhVienPhongVan> dsSV_sort = new ArrayList<>();
+        updateDB_Local();
         dsSV_sort.addAll(dsSVPV_local);
 
         String selectedItem = (String) cbSapXep.getSelectedItem();
@@ -351,7 +350,8 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
     }//GEN-LAST:event_cbSapXepActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:\
+                updateDB_Local();
         ArrayList<SinhVienPhongVan> dsSV_search = new ArrayList<>();
 
         String txtS = txtSearch.getText();
@@ -384,14 +384,6 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
 
                             iterator.remove();
                             model.ListSinhViens.add(svtn);
-                            for (PhongVan pv : model.getListPhongVans()) {
-                                if (pv.getNgayPV().equals(svpv_acp.getPhongVan().getNgayPV())) {
-                                    System.out.println(pv.getSoLuongThamGia());
-                                    soLuongThamGia = pv.getSoLuongThamGia();
-                                    pv.setSoLuongThamGia(--soLuongThamGia);
-
-                                }
-                            }
                             model.SaveChange();
                             updateDB_Local();
 
@@ -431,7 +423,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         DefaultTableModel modelTable = (DefaultTableModel) tableSVDangKy.getModel();
         int dem = 0;
         clearTable();
-
+                updateDB_Local();
         for (SinhVienPhongVan i : dsSVPV_local) {
             if (i.getLop().getTenLop().equals(dk)) {
                 modelTable.addRow(new Object[]{

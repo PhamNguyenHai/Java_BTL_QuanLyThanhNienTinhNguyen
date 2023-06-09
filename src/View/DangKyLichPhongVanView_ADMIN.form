@@ -50,7 +50,8 @@
                           </Group>
                           <Component id="themBtn" min="-2" max="-2" attributes="0"/>
                           <Component id="xoa" min="-2" max="-2" attributes="0"/>
-                          <Component id="thongKeBtn" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRefresh" min="-2" max="-2" attributes="0"/>
+                          <Component id="thongKeBtn" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="thoat" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -99,6 +100,8 @@
                       <Component id="themBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="xoa" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnRefresh" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="thongKeBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -243,6 +246,14 @@
       </Events>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="txtNgayPV">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRefresh">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
