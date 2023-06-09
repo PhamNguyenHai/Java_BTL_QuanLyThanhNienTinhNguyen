@@ -97,4 +97,10 @@ public class Models implements Serializable{
     public ArrayList<Lop> getListLops() {
         return ListLops;
     }    
+
+    public Iterable<PhongVan> getPhongVanList() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
 }
