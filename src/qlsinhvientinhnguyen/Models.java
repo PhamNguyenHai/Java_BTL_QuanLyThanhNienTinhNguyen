@@ -41,6 +41,15 @@ public class Models implements Serializable{
         this.ListLops = importedData.ListLops;
     }
     
+//    public static Models ImportData() throws Exception {
+//    FileInputStream fi = new FileInputStream("DATA.TXT");
+//    ObjectInputStream ois = new ObjectInputStream(fi);
+//    Models importedData = (Models)ois.readObject();
+//    fi.close();
+//    ois.close();
+//    return importedData;
+//    }
+    
     public void SaveChange() throws Exception{
         FileOutputStream fs = new FileOutputStream("DATA.TXT");
         ObjectOutputStream os = new ObjectOutputStream(fs);
@@ -87,10 +96,5 @@ public class Models implements Serializable{
 
     public ArrayList<Lop> getListLops() {
         return ListLops;
-    }   
-    
-    public String getNewMaHD(){
-        int Max = Integer.parseInt(ListHoatDongs.get(ListHoatDongs.size() - 1).getMaHD().replace("HD", ""));
-        return "HD" + Max;
-    }
+    }    
 }
