@@ -19,10 +19,6 @@ import qlsinhvientinhnguyen.Models;
 import qlsinhvientinhnguyen.PhongVan;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.sl.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import qlsinhvientinhnguyen.SinhVien;
 import qlsinhvientinhnguyen.SinhVienPhongVan;
 
@@ -419,22 +415,6 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
             });
         }
     }
-
-    public void thongke() {
-        try {
-            Workbook wb = new XSSFWorkbook();
-            Sheet sheet = (Sheet) wb.createSheet("DSLichDangKyPV");
-
-            int rowCount = 0;
-            for (SinhVien i : model.getListSinhViens()) {
-//               Row row = sheet.createRow(rowCount++);
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-    }
-
     // Xóa toàn bộ các hàng của bảng
     public void clearTable() {
         DefaultTableModel modelTable = (DefaultTableModel) tableLichDangKy_Admin.getModel();

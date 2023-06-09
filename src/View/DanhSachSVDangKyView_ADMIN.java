@@ -49,9 +49,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
     }
 
     private void load_SVPV_Local() {
-
         try {
-            model.Import();
             for (SinhVien i : model.getListSinhViens()) {
                 if (i instanceof SinhVienPhongVan) {
                     SinhVienPhongVan svPhongVan = (SinhVienPhongVan) i;
@@ -67,7 +65,6 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
 
     private void load_SVTN_Local() {
         try {
-            model.Import();
             for (SinhVien i : model.getListSinhViens()) {
                 if (i instanceof SinhVienTinhNguyen) {
                     SinhVienTinhNguyen svTinhNguyen = (SinhVienTinhNguyen) i;
@@ -169,6 +166,11 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         });
 
         jButton2.setText("Quản lý SV tình nguyện");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         btnChapNhan.setText("Chấp nhận");
         btnChapNhan.addActionListener(new java.awt.event.ActionListener() {
@@ -351,7 +353,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:\
-                updateDB_Local();
+        updateDB_Local();
         ArrayList<SinhVienPhongVan> dsSV_search = new ArrayList<>();
 
         String txtS = txtSearch.getText();
@@ -402,10 +404,15 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChapNhanActionPerformed
 
     public void updateDB_Local() {
-        dsSVPV_local = new ArrayList<>();
-        dsSVTN_local = new ArrayList<>();
-        load_SVPV_Local();
-        load_SVTN_Local();
+        try {
+            model.Import();
+            dsSVPV_local = new ArrayList<>();
+            dsSVTN_local = new ArrayList<>();
+            load_SVPV_Local();
+            load_SVTN_Local();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
     }
 
     private TaiKhoan themTK(String masv) {
@@ -423,7 +430,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         DefaultTableModel modelTable = (DefaultTableModel) tableSVDangKy.getModel();
         int dem = 0;
         clearTable();
-                updateDB_Local();
+        updateDB_Local();
         for (SinhVienPhongVan i : dsSVPV_local) {
             if (i.getLop().getTenLop().equals(dk)) {
                 modelTable.addRow(new Object[]{
@@ -466,6 +473,13 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        QuanLySinhVienTinhNguyenView_ADMIN dsdk = new QuanLySinhVienTinhNguyenView_ADMIN();
+        dsdk.setLocationRelativeTo(null);
+        dsdk.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
