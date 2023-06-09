@@ -16,6 +16,7 @@ import java.awt.FlowLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import qlsinhvientinhnguyen.SinhVienTinhNguyen;
 
 /**
  *
@@ -28,7 +29,9 @@ public class DangKyView extends javax.swing.JFrame {
      */
     Models model = new Models();
     String selectCB;
-    int soLuongThamGia = 0;
+    int soLuongThamGia;
+    boolean found;
+    boolean clickKT = false;
 
     public DangKyView() {
         initComponents();
@@ -74,10 +77,11 @@ public class DangKyView extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnGuiYeuCau = new javax.swing.JButton();
+        btnKiemTra = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        btnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,24 +136,31 @@ public class DangKyView extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Gửi yêu cầu");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnGuiYeuCau.setBackground(new java.awt.Color(0, 0, 0));
+        btnGuiYeuCau.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnGuiYeuCau.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuiYeuCau.setText("Gửi yêu cầu");
+        btnGuiYeuCau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnGuiYeuCauActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Kiểm Tra");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnKiemTra.setText("Kiểm Tra");
+        btnKiemTra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnKiemTraActionPerformed(evt);
             }
         });
 
         jScrollPane2.setViewportView(jList1);
+
+        btnRefresh.setText("Làm mới");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,31 +179,37 @@ public class DangKyView extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnRefresh)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(130, 130, 130)))))
                         .addGap(55, 55, 55))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnGuiYeuCau, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnKiemTra)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(209, 209, 209))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(279, 279, 279))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(54, 54, 54)
@@ -204,12 +221,14 @@ public class DangKyView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(3, 3, 3)
+                .addComponent(btnRefresh)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
+                            .addComponent(btnKiemTra))
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,16 +241,16 @@ public class DangKyView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGuiYeuCau, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGap(117, 117, 117))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(92, 92, 92)
@@ -255,54 +274,78 @@ public class DangKyView extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-    boolean found;
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+    private void btnGuiYeuCauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiYeuCauActionPerformed
         // TODO add your handling code here:
 //        PhongVan pv = new PhongVan();
-        try {
-            for (PhongVan i : model.getListPhongVans()) {
-                if (i.getNgayPV().toString().equals(selectCB)) {
-                    i.setSoLuongThamGia(++soLuongThamGia);
-                    for (SinhVien sv : model.getListSinhViens()) {
-                        if (sv instanceof SinhVienPhongVan) {
-                            SinhVienPhongVan sinhvienphongvan = (SinhVienPhongVan) sv;
-                            if (sinhvienphongvan.getMaSV().equals(jTextField1.getText())) {
-                                sinhvienphongvan.setPhongVan(i);
+        if (clickKT) {
+            int dem = 0;
+            try {
+                for (PhongVan i : model.getListPhongVans()) {
+                    if (i.getNgayPV().toString().equals(selectCB)) {
+                        for (SinhVien sv : model.getListSinhViens()) {
+                            if (sv instanceof SinhVienPhongVan) {
+                                SinhVienPhongVan sinhvienphongvan = (SinhVienPhongVan) sv;
+                                if (sinhvienphongvan.getMaSV().equals(jTextField1.getText()) && sinhvienphongvan.getPhongVan() == null) {
+                                    soLuongThamGia = i.getSoLuongThamGia();
+                                    i.setSoLuongThamGia(++soLuongThamGia);
+                                    System.out.println(i.getNgayPV());
+                                    sinhvienphongvan.setPhongVan(i);
+                                    model.SaveChange();
 
-                                System.out.println(i.getSoLuongThamGia());
-                                model.SaveChange();
-                                
+                                } else if (sinhvienphongvan.getMaSV().equals(jTextField1.getText()) && sinhvienphongvan.getPhongVan() != null) {
+                                    JOptionPane.showMessageDialog(null, "Sinh viên đã gửi yêu cầu trước đó!");
+                                }
                             }
                         }
                     }
+                }
+            } catch (Exception e) {
 
-//                pv = new PhongVan(i.getMaPV(), i.getNgayPV(), i.getPhongPV(), i.getSoLuong());
+            }
+           refreshList();
+            for (SinhVien i : model.getListSinhViens()) {
+                if (i instanceof SinhVienPhongVan) {
+                    SinhVienPhongVan svpvvv = (SinhVienPhongVan) i;
+                    if (svpvvv.getPhongVan() != null) {
+                        ++dem;
+                    }
                 }
             }
-        } catch (Exception e) {
-            
+            System.out.println(dem);
+        } else {
+            JOptionPane.showMessageDialog(null, "Kiểm tra thông tin trước khi gửi!");
         }
-        updateList();
-        jList1.repaint();
-    }//GEN-LAST:event_jButton3ActionPerformed
+        clickKT = false;
+    }//GEN-LAST:event_btnGuiYeuCauActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKiemTraActionPerformed
         // TODO add your handling code here:
         found = false;
+        String maSV = jTextField1.getText();
         ArrayList<SinhVien> svpv = new ArrayList<SinhVien>();
         svpv = model.getListSinhViens();
-        String maSV = jTextField1.getText();
         // String hoTen = jTextField2.getText();
         // String lop = jTextField3.getText();
 
         for (SinhVien sv : svpv) {
             if (sv instanceof SinhVienPhongVan) {
                 SinhVienPhongVan sinhvienphongvan = (SinhVienPhongVan) sv;//ép  từ sinh viên về sinh viên phỏng vấn
-                if (maSV.equals(sinhvienphongvan.getMaSV())) {
+                if (!checkSVTN(maSV)) {
+                    if (maSV.equals(sinhvienphongvan.getMaSV())) {
+                        found = true;
+                        clickKT = true;
+                        jTextField2.setText(sinhvienphongvan.getTenSV());
+                        jTextField3.setText(sinhvienphongvan.getLop().getTenLop());
+                        loadConboBox();
+                        break;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sinh viên đã là sinh viên tình nguyện");
                     found = true;
-                    jTextField2.setText(sinhvienphongvan.getTenSV());
-                    jTextField3.setText(sinhvienphongvan.getLop().getTenLop());
-                    loadConboBox();
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                    jComboBox1.removeAllItems();
                     break;
                 }
             }
@@ -315,12 +358,40 @@ public class DangKyView extends javax.swing.JFrame {
             jTextField3.setText("");
             jComboBox1.removeAllItems();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnKiemTraActionPerformed
+
+    public void refreshList() {
+        try {
+            model.Import();
+            updateList();
+            jList1.repaint();
+            System.out.println("Done");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    private boolean checkSVTN(String masv) {
+        for (SinhVien sv : model.getListSinhViens()) {
+            if (sv instanceof SinhVienTinhNguyen) {
+                SinhVienTinhNguyen sinhvientinhnguyen = (SinhVienTinhNguyen) sv;
+                if (masv.equals(sinhvientinhnguyen.getMaSV())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         selectCB = (String) jComboBox1.getSelectedItem();
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        refreshList();
+    }//GEN-LAST:event_btnRefreshActionPerformed
     private void loadConboBox() {
         jComboBox1.removeAllItems();
         for (PhongVan i : model.getListPhongVans()) {
@@ -383,9 +454,10 @@ public class DangKyView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuiYeuCau;
+    private javax.swing.JButton btnKiemTra;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

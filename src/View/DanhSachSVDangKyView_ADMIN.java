@@ -29,6 +29,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
     ArrayList<SinhVienPhongVan> dsSVPV_local;
     ArrayList<SinhVienTinhNguyen> dsSVTN_local;
     int dong = -1;
+    int soLuongThamGia;
 
     /**
      * Creates new form DanhSachSVDangKyView_ADMIN
@@ -43,7 +44,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
             load_SVTN_Local();
             loadTableLichDangKy(dsSVPV_local);
         } catch (Exception e) {
-            
+
         }
     }
 
@@ -54,7 +55,9 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
             for (SinhVien i : model.getListSinhViens()) {
                 if (i instanceof SinhVienPhongVan) {
                     SinhVienPhongVan svPhongVan = (SinhVienPhongVan) i;
-                    dsSVPV_local.add(svPhongVan);
+                    if(svPhongVan.getPhongVan() != null) {
+                        dsSVPV_local.add(svPhongVan);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -274,7 +277,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         try {
             dong = tableSVDangKy.getSelectedRow();
             if (dong != -1) {
-                SinhVien svpv_acp = dsSVPV_local.get(dong);
+                SinhVienPhongVan svpv_acp = dsSVPV_local.get(dong);
                 SinhVienPhongVan svpv = new SinhVienPhongVan(svpv_acp.getMaSV(), svpv_acp.getTenSV(), svpv_acp.getLop(), svpv_acp.getSDT(), svpv_acp.getEmail(), null);
                 Iterator<SinhVien> iterator = model.ListSinhViens.iterator();
                 while (iterator.hasNext()) {
@@ -287,6 +290,13 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
 
                             iterator.remove();
                             model.ListSinhViens.add(svpv);
+                            for (PhongVan pv : model.getListPhongVans()) {
+                                if (pv.getNgayPV().equals(svpv_acp.getPhongVan().getNgayPV())) {
+                                    System.out.println(pv.getSoLuongThamGia());
+                                    soLuongThamGia = pv.getSoLuongThamGia();
+                                    pv.setSoLuongThamGia(--soLuongThamGia);
+                                }
+                            }
                             model.SaveChange();
                             updateDB_Local();
 
@@ -360,7 +370,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         try {
             dong = tableSVDangKy.getSelectedRow();
             if (dong != -1) {
-                SinhVien svpv_acp = dsSVPV_local.get(dong);
+                SinhVienPhongVan svpv_acp = dsSVPV_local.get(dong);
                 SinhVienTinhNguyen svtn = new SinhVienTinhNguyen(svpv_acp.getMaSV(), svpv_acp.getTenSV(), svpv_acp.getLop(), svpv_acp.getSDT(), svpv_acp.getEmail(), themTK(svpv_acp.getMaSV()), "Thành viên");
                 Iterator<SinhVien> iterator = model.ListSinhViens.iterator();
                 while (iterator.hasNext()) {
@@ -374,6 +384,14 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
 
                             iterator.remove();
                             model.ListSinhViens.add(svtn);
+                            for (PhongVan pv : model.getListPhongVans()) {
+                                if (pv.getNgayPV().equals(svpv_acp.getPhongVan().getNgayPV())) {
+                                    System.out.println(pv.getSoLuongThamGia());
+                                    soLuongThamGia = pv.getSoLuongThamGia();
+                                    pv.setSoLuongThamGia(--soLuongThamGia);
+
+                                }
+                            }
                             model.SaveChange();
                             updateDB_Local();
 
@@ -427,6 +445,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         int dem = 0;
 
         for (SinhVienPhongVan i : arr) {
+            System.out.println(i.getPhongVan().getNgayPV());
             modelTable.addRow(new Object[]{
                 ++dem, i.getMaSV(), i.getTenSV(), i.getLop().getTenLop(), i.getLop().getKhoa(), i.getLop().getNienKhoa(), i.getSDT(), i.getEmail(), i.getPhongVan().getNgayPV()});
         }

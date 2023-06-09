@@ -26,8 +26,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import qlsinhvientinhnguyen.SinhVien;
 import qlsinhvientinhnguyen.SinhVienPhongVan;
 
-
-
 /**
  *
  * @author ADMIN
@@ -62,10 +60,6 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
             listSVPhongVan.get(1).setPhongVan(pvTest1);
             listSVPhongVan.get(2).setPhongVan(pvTest);
 
-            for (SinhVienPhongVan i : listSVPhongVan) {
-                System.out.println("Ma SV: " + i.getMaSV());
-                System.out.println("Ma SV: " + i.getPhongVan().getMaPV());
-            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
@@ -364,20 +358,20 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
     }
 
     public void thongke() {
-       try {
-           Workbook wb = new XSSFWorkbook();
-           Sheet sheet = (Sheet) wb.createSheet("DSLichDangKyPV");
-           
-           int rowCount = 0;
-           for(SinhVien i : model.getListSinhViens()) {
+        try {
+            Workbook wb = new XSSFWorkbook();
+            Sheet sheet = (Sheet) wb.createSheet("DSLichDangKyPV");
+
+            int rowCount = 0;
+            for (SinhVien i : model.getListSinhViens()) {
 //               Row row = sheet.createRow(rowCount++);
-           }
-           
-       }
-       catch (Exception e) {
-           
-       }
+            }
+
+        } catch (Exception e) {
+
+        }
     }
+
     // Xóa toàn bộ các hàng của bảng
     public void clearTable() {
         DefaultTableModel modelTable = (DefaultTableModel) tableLichDangKy_Admin.getModel();
