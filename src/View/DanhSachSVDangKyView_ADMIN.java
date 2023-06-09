@@ -78,6 +78,11 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         jLabel4.setText("Lọc");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HTTT1", "HTTT2" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Quản lý SV tình nguyện");
 
@@ -166,6 +171,10 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -33,4 +33,6 @@ public class SinhVienTinhNguyen extends SinhVien implements Serializable{
     public void setDanhGia(DanhGia DanhGia) {
         this.DanhGia = DanhGia;
     }
+
+    
 }
