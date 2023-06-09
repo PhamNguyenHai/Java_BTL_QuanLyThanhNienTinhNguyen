@@ -12,13 +12,17 @@ public class PhongVan implements Serializable{
     LocalDate NgayPV;
     String PhongPV;
     int SoLuong;
-    int SoLuongThamGia = 0;
+    int SoLuongThamGia = 0; 
 
     public void setSoLuongThamGia(int SoLuongThamGia) {
         this.SoLuongThamGia = SoLuongThamGia;
     }
 
     public PhongVan() {
+    }
+
+    public void setSoLuongThamGia(int SoLuongThamGia) {
+        this.SoLuongThamGia = SoLuongThamGia;
     }
 
     public PhongVan(String MaPV, LocalDate NgayPV, String PhongPV, int SoLuong) {
