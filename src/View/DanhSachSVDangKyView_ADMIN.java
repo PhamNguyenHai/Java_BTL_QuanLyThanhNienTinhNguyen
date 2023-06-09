@@ -463,6 +463,10 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         modelTable.setRowCount(0);
     }
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
