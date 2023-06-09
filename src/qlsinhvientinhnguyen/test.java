@@ -23,6 +23,7 @@ public class test extends Models {
         } catch (Exception e) {
             
         }
+        System.out.print("Đây là Thảo");
     }
   
 }
