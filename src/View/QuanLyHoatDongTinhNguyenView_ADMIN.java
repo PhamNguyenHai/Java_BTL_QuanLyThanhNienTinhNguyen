@@ -20,6 +20,8 @@ import qlsinhvientinhnguyen.HoatDong;
 import qlsinhvientinhnguyen.Models;
 import qlsinhvientinhnguyen.SinhVien;
 import qlsinhvientinhnguyen.SinhVienTinhNguyen;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -58,9 +60,17 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
         modelTable.setRowCount(0);
         int dem = 0;
         
-        for(HoatDong i : model.getListHoatDongs()){           
+        for(HoatDong i : model.getListHoatDongs()){   
+            int SoLuongSVTNTG = 0;
+            int TongSoSao = 0;
+            for(SinhVienTinhNguyen j : i.getDSSinhVienThamGia()){
+                if(j.getDanhGia() != null){
+                    TongSoSao += j.getDanhGia().getSoSaoDanhGia();   
+                    SoLuongSVTNTG++;
+                }
+            }
             modelTable.addRow(new Object[]{
-                ++dem, i.getTenHD(), i.getNgayBatDau().getDayOfMonth() + "-" + i.getNgayBatDau().getMonthValue()+ "-" + i.getNgayBatDau().getYear(), i.getMoTa(), i.getNguoiQuanLy(), i.getChiPhiHoTro()
+                ++dem, i.getTenHD(), i.getNgayBatDau().getDayOfMonth() + "-" + i.getNgayBatDau().getMonthValue()+ "-" + i.getNgayBatDau().getYear(), i.getMoTa(), i.getNguoiQuanLy(), i.getChiPhiHoTro(), i.getDSSinhVienThamGia().size(), (SoLuongSVTNTG == 0 ? 0 : (TongSoSao/SoLuongSVTNTG)) + "* / 5"
             });
         }
     }
@@ -89,6 +99,7 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
         btnThoat = new javax.swing.JButton();
         dateChooser = new com.toedter.calendar.JDateChooser();
         btnXemDS = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,7 +133,7 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Hoạt động", "Ngày bắt đầu", "Mô tả", "Người quản lý", "Chi phí hỗ trợ", "Đánh giá"
+                "STT", "Hoạt động", "Ngày bắt đầu", "Mô tả", "Người quản lý", "Chi phí hỗ trợ", "Số SVTN", "Đánh giá"
             }
         ));
         DSHoatDongTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -137,8 +148,10 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
             DSHoatDongTable.getColumnModel().getColumn(2).setMinWidth(80);
             DSHoatDongTable.getColumnModel().getColumn(2).setMaxWidth(120);
             DSHoatDongTable.getColumnModel().getColumn(5).setPreferredWidth(2);
-            DSHoatDongTable.getColumnModel().getColumn(6).setMinWidth(30);
+            DSHoatDongTable.getColumnModel().getColumn(6).setMinWidth(50);
             DSHoatDongTable.getColumnModel().getColumn(6).setMaxWidth(80);
+            DSHoatDongTable.getColumnModel().getColumn(7).setMinWidth(30);
+            DSHoatDongTable.getColumnModel().getColumn(7).setMaxWidth(80);
         }
 
         btnTimKiemTheoTenHD.setText("Tìm theo tên HD");
@@ -193,6 +206,13 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
             }
         });
 
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -241,7 +261,8 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
                                     .addComponent(btnTimKiemTheoTenHD, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(btnXemDS, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRefresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSua)))
                 .addGap(22, 22, 22))
         );
@@ -256,7 +277,7 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtChiPhiHoTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7)
@@ -275,15 +296,16 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
                         .addGap(12, 12, 12)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnThem)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtMoTaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addGap(2, 2, 2)))
-                .addComponent(btnSua)
-                .addGap(11, 11, 11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(btnRefresh))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnThem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSua)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -315,10 +337,13 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
             boolean check = false;
             int dem = 0;
         
-            for(HoatDong i : model.getListHoatDongs()){   
+            for(HoatDong i : model.getListHoatDongs()){ 
+                int SoLuongSVTNTG = i.getDSSinhVienThamGia().size();
+                int TongSoSao = 0;
+            
                 if(i.getTenHD().toLowerCase().contains(keyword.toLowerCase())){
                    modelTable.addRow(new Object[]{
-                        ++dem, i.getTenHD(), i.getNgayBatDau().getDayOfMonth() + "-" + i.getNgayBatDau().getMonthValue()+ "-" + i.getNgayBatDau().getYear(), i.getMoTa(), i.getNguoiQuanLy(), i.getChiPhiHoTro()
+                        ++dem, i.getTenHD(), i.getNgayBatDau().getDayOfMonth() + "-" + i.getNgayBatDau().getMonthValue()+ "-" + i.getNgayBatDau().getYear(), i.getMoTa(), i.getNguoiQuanLy(), i.getChiPhiHoTro(), SoLuongSVTNTG, (SoLuongSVTNTG == 0 ? 0 : (TongSoSao/SoLuongSVTNTG)) + "* / 5"
                     });
                     check = true;
                 }
@@ -405,9 +430,46 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
+//    public void XuatFileExcel(JTable table) throws IOException {
+//        try{
+//            Workbook workbook = new XSSFWorkbook();
+//            Sheet sheet = workbook.createSheet("Sheet1");
+//
+//            // Tạo header row
+//            Row headerRow = sheet.createRow(0);
+//            for (int i = 0; i < table.getColumnCount(); i++) {
+//                Cell headerCell = headerRow.createCell(i);
+//                headerCell.setCellValue(table.getColumnName(i));
+//            }
+//
+//            // Đổ dữ liệu từ JTable vào Excel
+//            for (int i = 0; i < table.getRowCount(); i++) {
+//                Row row = sheet.createRow(i + 1);
+//                for (int j = 0; j < table.getColumnCount(); j++) {
+//                    Cell cell = row.createCell(j);
+//                    Object value = table.getValueAt(i, j);
+//                    if (value != null) {
+//                        cell.setCellValue(value.toString());
+//                    }
+//                }
+//            }
+//
+//            // Lưu workbook vào file
+//            FileOutputStream fileOut = new FileOutputStream("QuanLyHoatDongTinhNguyen.xlsx");
+//            workbook.write(fileOut);
+//            fileOut.close();
+//            JOptionPane.showMessageDialog(null, "Đã xuất ra file: QL_HoatDongTinhNguyen.xlsx");
+//        }catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e.toString());
+//        }
+//    }
     
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
-        
+//        try{
+//            XuatFileExcel(DSHoatDongTable);
+//        }catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e.toString());
+//        }
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -433,6 +495,15 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
         dssvtg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         dssvtg.setVisible(true);
     }//GEN-LAST:event_btnXemDSActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        try{
+            model.Import();
+            loadTable();
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -471,6 +542,7 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DSHoatDongTable;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThoat;

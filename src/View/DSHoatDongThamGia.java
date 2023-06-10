@@ -2,7 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package qlsvtinhnguyen;
+package View;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import qlsinhvientinhnguyen.HoatDong;
+import qlsinhvientinhnguyen.Models;
+import qlsinhvientinhnguyen.SinhVienTinhNguyen;
 
 /**
  *
@@ -13,9 +20,51 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
     /**
      * Creates new form DSHoatDongThamGia
      */
+     Models model = new Models();
+     SinhVienTinhNguyen SVDN = null;
+     HoatDong hoatDongDGSelected = null;
+     
     public DSHoatDongThamGia() {
         initComponents();
+        
+        try{
+            model.Import();
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
     }
+    
+    public DSHoatDongThamGia(SinhVienTinhNguyen SVTNDangNhap) {
+        initComponents();
+        try{
+            SVDN = SVTNDangNhap;
+            model.Import();
+            loadTable();
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
+    public void loadTable(){
+        DefaultTableModel modelTable =  (DefaultTableModel)dshdthamgiaTable.getModel();
+        modelTable.setRowCount(0);
+        int dem = 0;
+        boolean check;
+        for(HoatDong i : model.getListHoatDongs()){   
+            check = false;
+            for(SinhVienTinhNguyen j : i.getDSSinhVienThamGia())
+                if(j.getMaSV().equals(SVDN.getMaSV())){
+                    check = true;
+                    break;
+                }
+            if(check == true)
+                modelTable.addRow(new Object[]{
+                    ++dem, i.getTenHD(), i.getNgayBatDau().getDayOfMonth() + "-" + i.getNgayBatDau().getMonthValue()+ "-" + i.getNgayBatDau().getYear(), i.getMoTa(), i.getNguoiQuanLy(), i.getChiPhiHoTro()
+                });
+        }
+    }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,11 +77,13 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtTimKiem = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        dshdthamgiaTable = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        btnTimKiem = new javax.swing.JButton();
+        btnDanhGia = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1200, 600));
@@ -43,41 +94,32 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Nhập thông tin: ");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtTimKiem.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtTimKiemActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Tìm kiếm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        dshdthamgiaTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "STT", "Hoạt động", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả", "Người quản lý", "Chi phí hỗ trợ", "Đánh giá hoạt động"
+                "STT", "Hoạt động", "Ngày bắt đầu", "Mô tả", "Người quản lý", "Chi phí hỗ trợ", "Đánh giá hoạt động"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(5);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(40);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(40);
+        dshdthamgiaTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rowHoatDongSelected(evt);
+            }
+        });
+        jScrollPane1.setViewportView(dshdthamgiaTable);
+        if (dshdthamgiaTable.getColumnModel().getColumnCount() > 0) {
+            dshdthamgiaTable.getColumnModel().getColumn(0).setMinWidth(30);
+            dshdthamgiaTable.getColumnModel().getColumn(0).setPreferredWidth(5);
+            dshdthamgiaTable.getColumnModel().getColumn(0).setMaxWidth(50);
+            dshdthamgiaTable.getColumnModel().getColumn(2).setPreferredWidth(40);
         }
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -85,6 +127,27 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
+
+        btnDanhGia.setText("Đánh giá");
+        btnDanhGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDanhGiaActionPerformed(evt);
+            }
+        });
+
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
             }
         });
 
@@ -103,10 +166,15 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
-                .addContainerGap(629, Short.MAX_VALUE))
+                        .addComponent(btnTimKiem)
+                        .addGap(29, 29, 29)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 450, Short.MAX_VALUE)
+                .addComponent(btnDanhGia)
+                .addGap(18, 18, 18)
+                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
@@ -114,11 +182,14 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDanhGia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
@@ -129,17 +200,68 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_txtTimKiemActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void btnDanhGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhGiaActionPerformed
+        try{
+            if(hoatDongDGSelected == null)
+                throw new Exception("Vui lòng chọn hoạt động muốn đánh giá");
+            else{
+                DanhGiaHoatDong dg = new DanhGiaHoatDong(hoatDongDGSelected, SVDN);
+                dg.setLocationRelativeTo(null);
+                dg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                dg.setVisible(true);
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }//GEN-LAST:event_btnDanhGiaActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        try{
+            model.Import();
+            loadTable();
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void rowHoatDongSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rowHoatDongSelected
+        DefaultTableModel modelTab = (DefaultTableModel) dshdthamgiaTable.getModel();
+        int selectedRow = dshdthamgiaTable.getSelectedRow();
+        if(selectedRow != -1){
+            Object value = modelTab.getValueAt(selectedRow, 1);
+            String TenHDSelected = "";
+            if(value != null){
+                TenHDSelected = (String)value;
+            }
+            for(HoatDong i : model.ListHoatDongs){
+                if(i.getTenHD().equals(TenHDSelected)){
+                    hoatDongDGSelected = i;
+                    break;
+                }
+            }
+            
+            for(SinhVienTinhNguyen i : hoatDongDGSelected.getDSSinhVienThamGia()){
+                if(i.getMaSV().equals(SVDN.getMaSV())){
+                    if(i.getDanhGia() != null)
+                        btnDanhGia.setEnabled(false);
+                    else
+                        btnDanhGia.setEnabled(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_rowHoatDongSelected
 
     /**
      * @param args the command line arguments
@@ -177,12 +299,14 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnDanhGia;
+    private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnTimKiem;
+    private javax.swing.JTable dshdthamgiaTable;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

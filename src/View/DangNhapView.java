@@ -134,7 +134,7 @@ public class DangNhapView extends javax.swing.JFrame {
                         adminTrangChu.setVisible(true);
                     }
                     else{
-                        TrangChuSV trangChu = new TrangChuSV();
+                        TrangChuSV trangChu = new TrangChuSV(checkTK);
                         trangChu.setLocationRelativeTo(null);
                         trangChu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         trangChu.setVisible(true);

@@ -62,7 +62,12 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("QUẢN LÝ HOẠT ĐỘNG TÌNH NGUYỆN");
+        btnQLHDTN.setText("QUẢN LÝ HOẠT ĐỘNG TÌNH NGUYỆN");
+        btnQLHDTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLHDTNActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("QUẢN LÝ ĐÁNH GIÁ HOẠT ĐỘNG");
 
@@ -134,6 +139,12 @@ public class TrangChu extends javax.swing.JFrame {
         n.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         n.getInstance().setVisible(true);
     }//GEN-LAST:event_btnQLSVTNActionPerformed
+    private void btnQLHDTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLHDTNActionPerformed
+        QuanLyHoatDongTinhNguyenView_ADMIN qlhdtn = new QuanLyHoatDongTinhNguyenView_ADMIN();
+        qlhdtn.setLocationRelativeTo(null);
+        qlhdtn.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        qlhdtn.setVisible(true);
+    }//GEN-LAST:event_btnQLHDTNActionPerformed
 
     /**
      * @param args the command line arguments
