@@ -384,6 +384,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
             if (dong != -1) {
                 SinhVienPhongVan svpv_acp = dsSVPV_local.get(dong);
                 SinhVienTinhNguyen svtn = new SinhVienTinhNguyen(svpv_acp.getMaSV(), svpv_acp.getTenSV(), svpv_acp.getLop(), svpv_acp.getSDT(), svpv_acp.getEmail(), themTK(svpv_acp.getMaSV()), "Thành viên");
+                System.out.println("mã sinh viên chấp nhận: " + svtn.getMaSV());
                 Iterator<SinhVien> iterator = model.ListSinhViens.iterator();
                 while (iterator.hasNext()) {
 
