@@ -317,7 +317,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
             DefaultTableModel modelTable = (DefaultTableModel) tb_dssvtn.getModel();
             modelTable.setRowCount(0);
             int dem = 0;
-            if (lopChon.equals("ALL")) {
+            if (lopChon.equals("Tất cả")) {
                 for (SinhVienTinhNguyen i : svtn) {
                     modelTable.addRow(new Object[]{
                         ++dem, i.getMaSV(), i.getTenSV(), i.getLop().getTenLop(), i.getLop().getKhoa(),
