@@ -15,16 +15,18 @@ import qlsinhvientinhnguyen.TaiKhoan;
  * @author ADMIN
  */
 public class DangNhapView extends javax.swing.JFrame {
+
     /**
      * Creates new form DangNhapView
-     */ 
+     */
     private static DangNhapView instance;
     Models model = new Models();
+
     public DangNhapView() {
         initComponents();
-        try{
+        try {
             model.Import();
-        }catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
@@ -132,57 +134,58 @@ public class DangNhapView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        try{
-            if(txtPassword.getPassword().equals("") || txtUsername.getText().equals(""))
+        try {
+            if (txtPassword.getPassword().equals("") || txtUsername.getText().equals("")) {
                 throw new Exception("Vui lòng nhập đủ user name và password");
+            }
 
             TaiKhoan checkTK = null;
-            for(TaiKhoan i : model.getListTaiKhoans())
-                if(i.getTenDN().equals(txtUsername.getText().trim()) && i.getMatKhau().equals(new String(txtPassword.getPassword())))
+            for (TaiKhoan i : model.getListTaiKhoans()) {
+                if (i.getTenDN().equals(txtUsername.getText().trim()) && i.getMatKhau().equals(new String(txtPassword.getPassword()))) {
                     checkTK = i;
-            
-            if(checkTK != null){
-                if(checkTK != null){
-                    if(checkTK.getQuyenTruyCap() == 1){
+                }
+            }
+
+            if (checkTK != null) {
+                if (checkTK != null) {
+                    if (checkTK.getQuyenTruyCap() == 1) {
                         TrangChu adminTrangChu = new TrangChu();
                         adminTrangChu.setLocationRelativeTo(null);
                         adminTrangChu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         adminTrangChu.setVisible(true);
-                    }
-                    else{
+                    } else {
                         TrangChuSV trangChu = new TrangChuSV(checkTK);
                         trangChu.setLocationRelativeTo(null);
                         trangChu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         trangChu.setVisible(true);
                     }
-                }                
-            }
-            else{
+                }
+            } else {
                 throw new Exception("Tài khoản không tồn tại");
             }
-            
-        }catch (Exception e) {
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
+        dispose();
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void closeDangNhap() {
-        dispose();
-    }
     /**
      * @param args the command line arguments
      */
-        public static DangNhapView getInstance() {
+    public static DangNhapView getInstance() {
         if (instance == null) {
             instance = new DangNhapView();
         }
         return instance;
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
