@@ -4,6 +4,14 @@
  */
 package View;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import qlsinhvientinhnguyen.DanhGia;
+import qlsinhvientinhnguyen.HoatDong;
+import qlsinhvientinhnguyen.Models;
+import qlsinhvientinhnguyen.SinhVien;
+import qlsinhvientinhnguyen.SinhVienTinhNguyen;
+
 /**
  *
  * @author An Viet Computer
@@ -13,8 +21,28 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
     /**
      * Creates new form DanhGiaHoatDong
      */
+    Models model = new Models();
+    HoatDong hoatDongDanhGia = null;
+    SinhVienTinhNguyen svtnDanhGia = null;
+    
     public DanhGiaHoatDong() {
+        try{
+            model.Import();
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
+    public DanhGiaHoatDong(HoatDong hoatDongSelected, SinhVienTinhNguyen sinhVienTNSelected ) {
         initComponents();
+        try{
+            model.Import();
+            hoatDongDanhGia = hoatDongSelected;
+            svtnDanhGia = sinhVienTNSelected;
+            sao_5.setSelected(true);
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
     }
 
     /**
@@ -26,18 +54,19 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        txtNoiDungDanhGia = new javax.swing.JTextArea();
+        btnGui = new javax.swing.JButton();
+        btnThoat = new javax.swing.JButton();
+        sao_4 = new javax.swing.JRadioButton();
+        sao_3 = new javax.swing.JRadioButton();
+        sao_2 = new javax.swing.JRadioButton();
+        sao_1 = new javax.swing.JRadioButton();
+        sao_5 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1200, 600));
@@ -51,75 +80,83 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Nội dung: ");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtNoiDungDanhGia.setColumns(20);
+        txtNoiDungDanhGia.setRows(5);
+        jScrollPane1.setViewportView(txtNoiDungDanhGia);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Gửi");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGui.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnGui.setText("Gửi");
+        btnGui.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuiActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Thoát");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnThoat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnThoatActionPerformed(evt);
             }
         });
 
-        jRadioButton1.setText("1/5");
-        jRadioButton1.setName("cbdanhgia"); // NOI18N
+        buttonGroup1.add(sao_4);
+        sao_4.setText("4/5");
+        sao_4.setName("cbdanhgia"); // NOI18N
 
-        jRadioButton2.setText("2/5");
-        jRadioButton2.setName("cbdanhgia"); // NOI18N
+        buttonGroup1.add(sao_3);
+        sao_3.setText("3/5");
+        sao_3.setName("cbdanhgia"); // NOI18N
 
-        jRadioButton3.setText("3/5");
-        jRadioButton3.setName("cbdanhgia"); // NOI18N
+        buttonGroup1.add(sao_2);
+        sao_2.setText("2/5");
+        sao_2.setName("cbdanhgia"); // NOI18N
 
-        jRadioButton4.setText("4/5");
-        jRadioButton4.setName("cbdanhgia"); // NOI18N
+        buttonGroup1.add(sao_1);
+        sao_1.setText("1/5");
+        sao_1.setName("cbdanhgia"); // NOI18N
 
-        jRadioButton5.setText("5/5");
-        jRadioButton5.setName("cbdanhgia"); // NOI18N
+        buttonGroup1.add(sao_5);
+        sao_5.setText("5/5");
+        sao_5.setName("cbdanhgia"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(314, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnGui)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnThoat)
+                        .addGap(174, 174, 174))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(283, 283, 283))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(123, 123, 123)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
-                .addGap(174, 174, 174))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                         .addGap(174, 174, 174))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(283, 283, 283))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton5)
-                        .addGap(253, 253, 253))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(sao_5)
+                        .addGap(34, 34, 34)
+                        .addComponent(sao_4)
+                        .addGap(29, 29, 29)
+                        .addComponent(sao_3)
+                        .addGap(35, 35, 35)
+                        .addComponent(sao_2)
+                        .addGap(36, 36, 36)
+                        .addComponent(sao_1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,32 +166,63 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5))
+                    .addComponent(sao_4)
+                    .addComponent(sao_3)
+                    .addComponent(sao_2)
+                    .addComponent(sao_1)
+                    .addComponent(sao_5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnThoat)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnGui, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
+        DanhGia dg = new DanhGia();
+        if(sao_5.isSelected())
+            dg.setSoSaoDanhGia(5);
+        else if(sao_4.isSelected())
+            dg.setSoSaoDanhGia(4);
+        else if(sao_3.isSelected())
+            dg.setSoSaoDanhGia(3);
+        else if(sao_2.isSelected())
+            dg.setSoSaoDanhGia(2);
+        else
+            dg.setSoSaoDanhGia(1);
+        dg.setNoiDungDanhGia(txtNoiDungDanhGia.getText());
+        try{
+            for(HoatDong i : model.ListHoatDongs){
+                if(i.getMaHD().equals(hoatDongDanhGia.getMaHD())){
+                    for(SinhVienTinhNguyen j : i.getDSSinhVienThamGia()){
+                        if(j.getMaSV().equals(svtnDanhGia.getMaSV())){
+                            j.setDanhGia(dg);
+                            model.SaveChange();
+                            JOptionPane.showMessageDialog(null, "Cảm ơn bạn đã đánh giá hoạt động");
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        dispose();
+    }//GEN-LAST:event_btnGuiActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,17 +261,18 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnGui;
+    private javax.swing.JButton btnThoat;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JRadioButton sao_1;
+    private javax.swing.JRadioButton sao_2;
+    private javax.swing.JRadioButton sao_3;
+    private javax.swing.JRadioButton sao_4;
+    private javax.swing.JRadioButton sao_5;
+    private javax.swing.JTextArea txtNoiDungDanhGia;
     // End of variables declaration//GEN-END:variables
 }

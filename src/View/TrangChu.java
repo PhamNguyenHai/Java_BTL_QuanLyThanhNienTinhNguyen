@@ -4,6 +4,8 @@
  */
 package View;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author thong
@@ -30,7 +32,7 @@ public class TrangChu extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnQLHDTN = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,7 +46,12 @@ public class TrangChu extends javax.swing.JFrame {
 
         jButton3.setText("QUẢN LÝ SINH VIÊN TÌNH NGUYỆN");
 
-        jButton4.setText("QUẢN LÝ HOẠT ĐỘNG TÌNH NGUYỆN");
+        btnQLHDTN.setText("QUẢN LÝ HOẠT ĐỘNG TÌNH NGUYỆN");
+        btnQLHDTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLHDTNActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("QUẢN LÝ ĐÁNH GIÁ HOẠT ĐỘNG");
 
@@ -62,7 +69,7 @@ public class TrangChu extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton3)
-                            .addComponent(jButton4)))
+                            .addComponent(btnQLHDTN)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(234, 234, 234)
                         .addComponent(jLabel1))
@@ -83,7 +90,7 @@ public class TrangChu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnQLHDTN, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
@@ -91,6 +98,13 @@ public class TrangChu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnQLHDTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLHDTNActionPerformed
+        QuanLyHoatDongTinhNguyenView_ADMIN qlhdtn = new QuanLyHoatDongTinhNguyenView_ADMIN();
+        qlhdtn.setLocationRelativeTo(null);
+        qlhdtn.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        qlhdtn.setVisible(true);
+    }//GEN-LAST:event_btnQLHDTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,10 +145,10 @@ public class TrangChu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnQLHDTN;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
