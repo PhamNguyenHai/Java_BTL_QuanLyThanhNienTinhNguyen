@@ -23,33 +23,35 @@ public class TrangChuSV extends javax.swing.JFrame {
     Models model = new Models();
     SinhVienTinhNguyen SVDangNhap = null;
     TaiKhoan TKDN = null;
-    
+
     public TrangChuSV() {
         initComponents();
     }
-    
+
     public TrangChuSV(TaiKhoan TKSVDangNhap) {
         initComponents();
-        
-        try{
+
+        try {
             model.Import();
             TKDN = TKSVDangNhap;
             displaySvtnName();
-        }catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
-    
-    public void KiemTraSinhVienTinhNguyenDangNhap(){
-        for(SinhVien i : model.getListSinhViens())
-                if(i instanceof SinhVienTinhNguyen)
-                    if(i.getTaiKhoan().getTenDN().equals(TKDN.getTenDN()) && i.getTaiKhoan().getMatKhau().equals(TKDN.getMatKhau())){
-                        SVDangNhap = (SinhVienTinhNguyen)i;
-                        break;
-                    }
+
+    public void KiemTraSinhVienTinhNguyenDangNhap() {
+        for (SinhVien i : model.getListSinhViens()) {
+            if (i instanceof SinhVienTinhNguyen) {
+                if (i.getTaiKhoan().getTenDN().equals(TKDN.getTenDN()) && i.getTaiKhoan().getMatKhau().equals(TKDN.getMatKhau())) {
+                    SVDangNhap = (SinhVienTinhNguyen) i;
+                    break;
+                }
+            }
+        }
     }
-    
-    public void displaySvtnName(){
+
+    public void displaySvtnName() {
         KiemTraSinhVienTinhNguyenDangNhap();
         svtnName.setText("Xin chào : " + SVDangNhap.getTenSV());
     }

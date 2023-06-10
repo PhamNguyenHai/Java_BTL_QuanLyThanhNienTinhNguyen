@@ -33,7 +33,6 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
      */
     Models model = new Models();
     ArrayList<SinhVienTinhNguyen> svtn = new ArrayList<SinhVienTinhNguyen>();
-    int dongChon = -1;
     int dongSelect = -1;
     private static QuanLySinhVienTinhNguyenView_ADMIN instance;
 
@@ -333,9 +332,10 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        dongChon = tb_dssvtn.getSelectedRow();
+        dongSelect = tb_dssvtn.getSelectedRow();
+        System.out.println("Dòng chọn: " + dongSelect);
         try {
-            if (dongChon != -1) {
+            if (dongSelect != -1) {
                 if (JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa ?", "Thong bao", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
                     Iterator<SinhVien> iterator = model.ListSinhViens.iterator();
                     while (iterator.hasNext()) {
@@ -345,10 +345,10 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
 
                             SinhVienTinhNguyen svTinhNguyen = (SinhVienTinhNguyen) sv;
 
-                            if (svTinhNguyen.getMaSV().equals(svtn.get(dongChon).getMaSV())) {
+                            if (svTinhNguyen.getMaSV().equals(svtn.get(dongSelect).getMaSV())) {
 
                                 iterator.remove();
-                                System.out.println(model.getListSinhViens().size());
+                                System.out.println("Số lượng " + model.getListSinhViens().size());
                                 model.SaveChange();
                                 updateDB_Local();
 
@@ -373,6 +373,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.toString(), "Thong bao", JOptionPane.ERROR_MESSAGE);
         }
+        dongSelect = -1;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void clearTable() {
@@ -470,6 +471,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
             model.Import();
             clearTable();
             loadTable();
+            updateDB_Local();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }

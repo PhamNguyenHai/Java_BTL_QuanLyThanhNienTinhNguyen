@@ -4,11 +4,13 @@
  */
 package View;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -332,6 +334,11 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
+    Comparator<SinhVienPhongVan> tenSVComparator = Comparator.comparing(
+            SinhVienPhongVan::getTenSV,
+            Collator.getInstance(new Locale("vi", "VN"))
+    );
+
     private void cbSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSapXepActionPerformed
         // TODO add your handling code here:
         ArrayList<SinhVienPhongVan> dsSV_sort = new ArrayList<>();
@@ -340,7 +347,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
 
         String selectedItem = (String) cbSapXep.getSelectedItem();
         if (selectedItem.equals("Tên sinh viên")) {
-            Collections.sort(dsSV_sort, Comparator.comparing(SinhVienPhongVan::getTenSV));
+            Collections.sort(dsSV_sort, tenSVComparator);
         }
         if (selectedItem.equals("Mã sinh viên")) {
             Collections.sort(dsSV_sort, Comparator.comparing(SinhVienPhongVan::getMaSV));
@@ -372,6 +379,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             dong = tableSVDangKy.getSelectedRow();
+            int check = 0;
             if (dong != -1) {
                 SinhVienPhongVan svpv_acp = dsSVPV_local.get(dong);
                 SinhVienTinhNguyen svtn = new SinhVienTinhNguyen(svpv_acp.getMaSV(), svpv_acp.getTenSV(), svpv_acp.getLop(), svpv_acp.getSDT(), svpv_acp.getEmail(), themTK(svpv_acp.getMaSV()), "Thành viên");
@@ -388,8 +396,13 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
                             iterator.remove();
                             model.ListSinhViens.add(svtn);
                             model.SaveChange();
+                            for (SinhVien i : model.getListSinhViens())  {
+                                if(i instanceof SinhVienPhongVan) {
+                                    check += 1;
+                                }
+                            }
+                            System.out.println("Số lượng SV sau mỗi lần chấp nhận: " + check);
                             updateDB_Local();
-
                             clearTable();
                             loadTableLichDangKy(dsSVPV_local);
                             break;
@@ -445,7 +458,6 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         int dem = 0;
 
         for (SinhVienPhongVan i : arr) {
-            System.out.println(i.getPhongVan().getNgayPV());
             modelTable.addRow(new Object[]{
                 ++dem, i.getMaSV(), i.getTenSV(), i.getLop().getTenLop(), i.getLop().getKhoa(), i.getLop().getNienKhoa(), i.getSDT(), i.getEmail(), i.getPhongVan().getNgayPV()});
         }
@@ -491,6 +503,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         }
         return instance;
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
