@@ -147,6 +147,7 @@ public class TrangChuSV extends javax.swing.JFrame {
             n.getInstance().setLocationRelativeTo(null);
             n.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             n.getInstance().setVisible(true);
+            
         }
 
     }//GEN-LAST:event_btnThoatActionPerformed

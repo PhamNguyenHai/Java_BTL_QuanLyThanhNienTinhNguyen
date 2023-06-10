@@ -147,14 +147,15 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         if (tableSVDangKy.getColumnModel().getColumnCount() > 0) {
             tableSVDangKy.getColumnModel().getColumn(0).setMinWidth(40);
             tableSVDangKy.getColumnModel().getColumn(0).setMaxWidth(40);
-            tableSVDangKy.getColumnModel().getColumn(1).setMinWidth(80);
-            tableSVDangKy.getColumnModel().getColumn(1).setMaxWidth(80);
+            tableSVDangKy.getColumnModel().getColumn(1).setResizable(false);
+            tableSVDangKy.getColumnModel().getColumn(2).setMinWidth(200);
+            tableSVDangKy.getColumnModel().getColumn(2).setMaxWidth(200);
             tableSVDangKy.getColumnModel().getColumn(3).setMinWidth(80);
             tableSVDangKy.getColumnModel().getColumn(3).setMaxWidth(80);
             tableSVDangKy.getColumnModel().getColumn(4).setMinWidth(80);
             tableSVDangKy.getColumnModel().getColumn(4).setMaxWidth(80);
-            tableSVDangKy.getColumnModel().getColumn(5).setMinWidth(100);
-            tableSVDangKy.getColumnModel().getColumn(5).setMaxWidth(100);
+            tableSVDangKy.getColumnModel().getColumn(5).setMinWidth(80);
+            tableSVDangKy.getColumnModel().getColumn(5).setMaxWidth(80);
             tableSVDangKy.getColumnModel().getColumn(7).setMinWidth(200);
             tableSVDangKy.getColumnModel().getColumn(7).setMaxWidth(200);
         }

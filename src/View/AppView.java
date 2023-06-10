@@ -12,6 +12,7 @@ import javax.swing.JFrame;
  * @author ADMIN
  */
 public class AppView extends javax.swing.JFrame {
+    private static AppView instance;
 
     /**
      * Creates new form AppView
@@ -92,15 +93,21 @@ public class AppView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDkiSVTNActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        DangNhapView dnv = new DangNhapView();
-        dnv.setLocationRelativeTo(null);
-        dnv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        dnv.setVisible(true);
+            DangNhapView dnv = new DangNhapView();
+            dnv.setLocationRelativeTo(null);
+            dnv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            dnv.setVisible(true);
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     /**
      * @param args the command line arguments
      */
+     public static AppView getInstance() {
+        if (instance == null) {
+            instance = new AppView();
+        }
+        return instance;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -128,7 +135,7 @@ public class AppView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AppView().setVisible(true);
+                new AppView().getInstance().setVisible(true);
             }
         });
     }

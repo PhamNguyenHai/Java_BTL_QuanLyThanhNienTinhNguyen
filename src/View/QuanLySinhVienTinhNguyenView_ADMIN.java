@@ -126,6 +126,14 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tb_dssvtn);
+        if (tb_dssvtn.getColumnModel().getColumnCount() > 0) {
+            tb_dssvtn.getColumnModel().getColumn(0).setMinWidth(50);
+            tb_dssvtn.getColumnModel().getColumn(0).setMaxWidth(50);
+            tb_dssvtn.getColumnModel().getColumn(2).setMinWidth(200);
+            tb_dssvtn.getColumnModel().getColumn(2).setMaxWidth(200);
+            tb_dssvtn.getColumnModel().getColumn(5).setMinWidth(80);
+            tb_dssvtn.getColumnModel().getColumn(5).setMaxWidth(80);
+        }
 
         jLabel2.setText("Tên sinh viên");
 
@@ -144,7 +152,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
 
         jLabel3.setText("Lọc");
 
-        cb_Loc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "HTTT1", "HTTT2", "CNTT5", "KTPM1", "KHMT01" }));
+        cb_Loc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "HTTT1", "CNTT1", "KTPM1", "KHMT01" }));
         cb_Loc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_LocActionPerformed(evt);
@@ -398,7 +406,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
     Sheet sheet = (Sheet) workbook.createSheet("QL_DonHang"); // tạo 1 đối tượng sheet, đại diện cho sheet bên trong file Excel
 
     public void pt_XuatFileExcel(JTable table) throws IOException {
-
+        updateDB_Local();
         // tạo tên cột 
         Row headerRow = sheet.createRow(0);
         for (int i = 0; i < table.getColumnCount(); i++) {
