@@ -144,7 +144,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
 
         jLabel3.setText("Lọc");
 
-        cb_Loc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "HTTT1", "HTTT2", "CNTT5", "" }));
+        cb_Loc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "HTTT1", "HTTT2", "CNTT5", "KTPM1", "KHMT01" }));
         cb_Loc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_LocActionPerformed(evt);
@@ -201,8 +201,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -211,9 +210,12 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
                         .addComponent(bt_search)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(cb_Loc, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cb_Loc, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)))
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,7 +277,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
         try {
             String maDHS = txt_tenSearch.getText();
             for (SinhVienTinhNguyen i : svtn) {
-                if (i.getTenSV().equals(maDHS)) {
+                if (i.getTenSV().toLowerCase().contains(maDHS)) {
                     lsDHSearch.add(i);
                 }
             }

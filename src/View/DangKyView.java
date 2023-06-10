@@ -274,8 +274,6 @@ public class DangKyView extends javax.swing.JFrame {
                                 SinhVienPhongVan sinhvienphongvan = (SinhVienPhongVan) sv;
                                 if (sinhvienphongvan.getMaSV().equals(jTextField1.getText()) && sinhvienphongvan.getPhongVan() == null) {
                                     if (i.getSoLuongThamGia() < i.getSoLuong()) {
-                                        System.out.println(i.getSoLuongThamGia());
-                                        System.out.println(i.getSoLuong());
                                         soLuongThamGia = i.getSoLuongThamGia();
                                         i.setSoLuongThamGia(++soLuongThamGia);
                                         sinhvienphongvan.setPhongVan(i);
