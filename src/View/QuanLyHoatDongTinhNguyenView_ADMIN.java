@@ -20,8 +20,6 @@ import qlsinhvientinhnguyen.HoatDong;
 import qlsinhvientinhnguyen.Models;
 import qlsinhvientinhnguyen.SinhVien;
 import qlsinhvientinhnguyen.SinhVienTinhNguyen;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -390,7 +388,9 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
                 && dateChooser == null)
                 throw new Exception("Vui lòng nhập đầy đủ thông tin");
             else{
-                HoatDong them = new HoatDong(model.getNewMaHD(), txtTenHD.getText(), dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), txtMoTaHD.getText(), txtNguoiQLyHD.getText(), Double.parseDouble(txtChiPhiHoTro.getText()));
+                String MaMoi = model.getNewMaHD();
+                System.out.println(MaMoi);
+                HoatDong them = new HoatDong(MaMoi, txtTenHD.getText(), dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), txtMoTaHD.getText(), txtNguoiQLyHD.getText(), Double.parseDouble(txtChiPhiHoTro.getText()));
                 model.ListHoatDongs.add(them);
                 model.SaveChange();
                 JOptionPane.showMessageDialog(this, "Thêm thành công");

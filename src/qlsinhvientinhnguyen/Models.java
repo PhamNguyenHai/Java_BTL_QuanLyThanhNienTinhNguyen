@@ -100,6 +100,7 @@ public class Models implements Serializable{
     
     public String getNewMaHD(){
         int Max = Integer.parseInt(ListHoatDongs.get(ListHoatDongs.size() - 1).getMaHD().replace("HD", ""));
-        return "HD" + Max;
+        Max += 1;
+        return Max < 10 ? "HD0" + Max : "HD" + Max;
     }
 }
