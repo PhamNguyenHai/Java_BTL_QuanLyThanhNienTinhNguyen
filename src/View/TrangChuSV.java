@@ -23,6 +23,7 @@ public class TrangChuSV extends javax.swing.JFrame {
     Models model = new Models();
     SinhVienTinhNguyen SVDangNhap = null;
     TaiKhoan TKDN = null;
+    private static TrangChuSV instance;
 
     public TrangChuSV() {
         initComponents();
@@ -80,11 +81,16 @@ public class TrangChuSV extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Trang chủ");
 
         btnThoat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnThoat.setText("Thoát");
+        btnThoat.setText("Đăng xuất");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         svtnName.setText("Xin chào : ");
 
@@ -113,9 +119,9 @@ public class TrangChuSV extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(svtnName, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(33, 33, 33)
                 .addComponent(btnHoatDongTG, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,9 +138,29 @@ public class TrangChuSV extends javax.swing.JFrame {
         dshdtg.setVisible(true);
     }//GEN-LAST:event_btnHoatDongTGActionPerformed
 
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất không", "Xác nhận đăng xuất", JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            dispose();
+            DangNhapView n = new DangNhapView();
+            n.getInstance().setLocationRelativeTo(null);
+            n.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            n.getInstance().setVisible(true);
+        }
+
+    }//GEN-LAST:event_btnThoatActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    public static TrangChuSV getInstance() {
+        if (instance == null) {
+            instance = new TrangChuSV();
+        }
+        return instance;
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -146,23 +172,31 @@ public class TrangChuSV extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TrangChuSV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChuSV.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TrangChuSV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChuSV.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TrangChuSV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChuSV.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TrangChuSV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChuSV.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TrangChuSV().setVisible(true);
+                new TrangChuSV().getInstance().setVisible(true);
             }
         });
     }

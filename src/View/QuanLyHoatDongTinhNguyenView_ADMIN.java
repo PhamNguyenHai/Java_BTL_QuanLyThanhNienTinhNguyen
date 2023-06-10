@@ -36,6 +36,7 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
      */
     Models model = new Models();
     HoatDong hoatDongSelected = null;
+     private static QuanLyHoatDongTinhNguyenView_ADMIN instance;
     
     public QuanLyHoatDongTinhNguyenView_ADMIN() {
         initComponents();
@@ -463,7 +464,8 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:\
+        dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void RowMouseRenderToForm(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RowMouseRenderToForm
@@ -564,6 +566,12 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+     public static QuanLyHoatDongTinhNguyenView_ADMIN getInstance() {
+        if (instance == null) {
+            instance = new QuanLyHoatDongTinhNguyenView_ADMIN();
+        }
+        return instance;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -591,7 +599,7 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuanLyHoatDongTinhNguyenView_ADMIN().setVisible(true);
+                new QuanLyHoatDongTinhNguyenView_ADMIN().getInstance().setVisible(true);
             }
         });
     }

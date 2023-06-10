@@ -32,6 +32,7 @@ public class DangKyView extends javax.swing.JFrame {
     int soLuongThamGia;
     boolean found;
     boolean clickKT = false;
+    private static DangKyView instance;
 
     public DangKyView() {
         initComponents();
@@ -263,7 +264,7 @@ public class DangKyView extends javax.swing.JFrame {
 
     private void btnGuiYeuCauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiYeuCauActionPerformed
         // TODO add your handling code here:
-                                               
+
         if (clickKT) {
             int dem = 0;
             try {
@@ -410,6 +411,13 @@ public class DangKyView extends javax.swing.JFrame {
         }
     }
 
+    public static DangKyView getInstance() {
+        if (instance == null) {
+            instance = new DangKyView();
+        }
+        return instance;
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -437,7 +445,7 @@ public class DangKyView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DangKyView().setVisible(true);
+                new DangKyView().getInstance().setVisible(true);
             }
         });
     }

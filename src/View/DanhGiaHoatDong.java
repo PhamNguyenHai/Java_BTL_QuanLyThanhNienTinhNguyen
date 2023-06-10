@@ -24,7 +24,7 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
     Models model = new Models();
     HoatDong hoatDongDanhGia = null;
     SinhVienTinhNguyen svtnDanhGia = null;
-    
+     private static DanhGiaHoatDong instance;
     public DanhGiaHoatDong() {
         try{
             model.Import();
@@ -71,7 +71,7 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1200, 600));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Đánh giá hoạt động");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -125,16 +125,11 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(314, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnGui)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnThoat)
-                        .addGap(174, 174, 174))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(283, 283, 283))))
+                .addContainerGap(485, Short.MAX_VALUE)
+                .addComponent(btnGui)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnThoat)
+                .addGap(174, 174, 174))
             .addGroup(layout.createSequentialGroup()
                 .addGap(123, 123, 123)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -157,13 +152,16 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addComponent(sao_1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(291, 291, 291)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(sao_4)
@@ -222,11 +220,18 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    public static DanhGiaHoatDong getInstance() {
+        if (instance == null) {
+            instance = new DanhGiaHoatDong();
+        }
+        return instance;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -255,7 +260,7 @@ public class DanhGiaHoatDong extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DanhGiaHoatDong().setVisible(true);
+                new DanhGiaHoatDong().getInstance().setVisible(true);
             }
         });
     }

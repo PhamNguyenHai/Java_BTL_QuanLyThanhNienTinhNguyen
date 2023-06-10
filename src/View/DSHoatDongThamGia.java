@@ -23,6 +23,7 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
      Models model = new Models();
      SinhVienTinhNguyen SVDN = null;
      HoatDong hoatDongDGSelected = null;
+      private static DSHoatDongThamGia instance;
      
     public DSHoatDongThamGia() {
         initComponents();
@@ -213,6 +214,7 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
@@ -306,6 +308,13 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+     public static DSHoatDongThamGia getInstance() {
+        if (instance == null) {
+            instance = new DSHoatDongThamGia();
+        }
+        return instance;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -333,7 +342,7 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DSHoatDongThamGia().setVisible(true);
+                new DSHoatDongThamGia().getInstance().setVisible(true);
             }
         });
     }

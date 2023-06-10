@@ -26,6 +26,7 @@ public class DanhSachSVThamGia_Admin extends javax.swing.JFrame {
     ArrayList<SinhVienTinhNguyen> listSVTN;
     SinhVienTinhNguyen svtnSelected = null;
     SinhVienTinhNguyen svtgSelected = null;
+    private static DanhSachSVThamGia_Admin instance;
     
     public DanhSachSVThamGia_Admin() {
         initComponents();
@@ -353,6 +354,12 @@ public class DanhSachSVThamGia_Admin extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+     public static DanhSachSVThamGia_Admin getInstance() {
+        if (instance == null) {
+            instance = new DanhSachSVThamGia_Admin();
+        }
+        return instance;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -380,7 +387,7 @@ public class DanhSachSVThamGia_Admin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DanhSachSVThamGia_Admin().setVisible(true);
+                new DanhSachSVThamGia_Admin().getInstance().setVisible(true);
             }
         });
     }

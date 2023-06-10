@@ -18,6 +18,7 @@ public class DangNhapView extends javax.swing.JFrame {
     /**
      * Creates new form DangNhapView
      */ 
+    private static DangNhapView instance;
     Models model = new Models();
     public DangNhapView() {
         initComponents();
@@ -153,6 +154,12 @@ public class DangNhapView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+        public static DangNhapView getInstance() {
+        if (instance == null) {
+            instance = new DangNhapView();
+        }
+        return instance;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -180,7 +187,7 @@ public class DangNhapView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DangNhapView().setVisible(true);
+                new DangNhapView().getInstance().setVisible(true);
             }
         });
     }
