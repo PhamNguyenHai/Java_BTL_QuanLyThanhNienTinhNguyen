@@ -57,10 +57,11 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
                     check = true;
                     break;
                 }
-            if(check == true)
+            if(check == true){
                 modelTable.addRow(new Object[]{
                     ++dem, i.getTenHD(), i.getNgayBatDau().getDayOfMonth() + "-" + i.getNgayBatDau().getMonthValue()+ "-" + i.getNgayBatDau().getYear(), i.getMoTa(), i.getNguoiQuanLy(), i.getChiPhiHoTro()
                 });
+            }
         }
     }
     
@@ -84,6 +85,7 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
         btnTimKiem = new javax.swing.JButton();
         btnDanhGia = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
+        txtdhHoatDong = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1200, 600));
@@ -106,7 +108,7 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Hoạt động", "Ngày bắt đầu", "Mô tả", "Người quản lý", "Chi phí hỗ trợ", "Đánh giá hoạt động"
+                "STT", "Hoạt động", "Ngày bắt đầu", "Mô tả", "Người quản lý", "Chi phí hỗ trợ"
             }
         ));
         dshdthamgiaTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -171,9 +173,12 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
                         .addComponent(btnTimKiem)
                         .addGap(29, 29, 29)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 450, Short.MAX_VALUE)
-                .addComponent(btnDanhGia)
-                .addGap(18, 18, 18)
-                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDanhGia)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtdhHoatDong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(1, 1, 1))
             .addComponent(jScrollPane1)
         );
@@ -181,7 +186,9 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtdhHoatDong))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -209,7 +216,33 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel modelTable =  (DefaultTableModel)dshdthamgiaTable.getModel();
+        
+        String keyword = txtTimKiem.getText();
+        
+        if(keyword.isEmpty()){
+            loadTable();
+        }
+        else{
+            modelTable.setRowCount(0);
+            int dem = 0;
+            boolean check;
+            for(HoatDong i : model.getListHoatDongs()){   
+                check = false;
+                for(SinhVienTinhNguyen j : i.getDSSinhVienThamGia())
+                    if(j.getMaSV().equals(SVDN.getMaSV())){
+                        check = true;
+                        break;
+                }
+                if(check == true && i.getTenHD().toLowerCase().contains(keyword.toLowerCase())){
+                    modelTable.addRow(new Object[]{
+                        ++dem, i.getTenHD(), i.getNgayBatDau().getDayOfMonth() + "-" + i.getNgayBatDau().getMonthValue()+ "-" + i.getNgayBatDau().getYear(), i.getMoTa(), i.getNguoiQuanLy(), i.getChiPhiHoTro()
+                    });
+                }
+            }
+            if(dem == 0)
+                JOptionPane.showMessageDialog(this, "Không tìm thấy hoạt động");
+        }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnDanhGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhGiaActionPerformed
@@ -230,6 +263,8 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         try{
             model.Import();
+            hoatDongDGSelected = null;
+            txtdhHoatDong.setText("");
             loadTable();
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
@@ -254,10 +289,15 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
             
             for(SinhVienTinhNguyen i : hoatDongDGSelected.getDSSinhVienThamGia()){
                 if(i.getMaSV().equals(SVDN.getMaSV())){
-                    if(i.getDanhGia() != null)
+                    if(i.getDanhGia() != null){
                         btnDanhGia.setEnabled(false);
-                    else
+                        txtdhHoatDong.setText("Đã đánh giá : " + i.getDanhGia().getSoSaoDanhGia() + "*");
+                    }
+                        
+                    else{
                         btnDanhGia.setEnabled(true);
+                        txtdhHoatDong.setText("Chưa đánh giá hoạt động này");
+                    }
                 }
             }
         }
@@ -308,5 +348,6 @@ public class DSHoatDongThamGia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtTimKiem;
+    private javax.swing.JLabel txtdhHoatDong;
     // End of variables declaration//GEN-END:variables
 }

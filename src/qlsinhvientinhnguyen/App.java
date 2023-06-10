@@ -18,7 +18,7 @@ public class App {
         
         ArrayList<PhongVan> ListPV = new ArrayList<PhongVan>();
         ListPV.add(new PhongVan("PV01", LocalDate.of(2023, 3, 5), "305 - A10", 10));
-    ListPV.add(new PhongVan("PV02", LocalDate.of(2023, 5, 8), "305 - A10", 5));
+        ListPV.add(new PhongVan("PV02", LocalDate.of(2023, 5, 8), "305 - A10", 5));
         
         
         ArrayList<TaiKhoan> ListTK = new ArrayList<TaiKhoan>();
