@@ -6,6 +6,7 @@ package View;
 
 import com.toedter.calendar.JDateChooser;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,6 +22,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import qlsinhvientinhnguyen.SinhVien;
 import qlsinhvientinhnguyen.SinhVienPhongVan;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Font;
 
 /**
  *
@@ -49,23 +56,10 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
                     listSVPhongVan.add((SinhVienPhongVan) sv);
                 }
             }
-            ArrayList<PhongVan> listPhongVan = model.getListPhongVans();
-            PhongVan pvTest = listPhongVan.get(0);
-            PhongVan pvTest1 = listPhongVan.get(1);
-
-            listSVPhongVan.get(0).setPhongVan(pvTest);
-            listSVPhongVan.get(1).setPhongVan(pvTest1);
-            listSVPhongVan.get(2).setPhongVan(pvTest);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
-    }
-
-    public void pt_XuatFileExcel(JTable table) throws IOException {
-//        Workbook workbook = new XSSFWorkbook();
-//        Sheet sheet = workbook.createSheet("People");
-
     }
 
     /**
@@ -254,9 +248,45 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void thongKeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thongKeBtnActionPerformed
-        // TODO add your handling code here:
+    Workbook workbook = new XSSFWorkbook(); // tạo mới đối tượng đại diện cho excel.
+    Sheet sheet = (Sheet) workbook.createSheet("QL_LichDangKyPhongVan"); // tạo 1 đối tượng sheet, đại diện cho sheet bên trong file Excel
 
+    public void pt_XuatFileExcel(JTable table) throws IOException {
+
+        // tạo tên cột 
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            Cell headerCell = headerRow.createCell(i);
+            headerCell.setCellValue(table.getColumnName(i));
+            // tạo font chữ đận cho tên cột 
+            org.apache.poi.ss.usermodel.Font font = workbook.createFont();
+            //font.setFontWeight(FontWeight.BOLD);
+            org.apache.poi.ss.usermodel.CellStyle style = workbook.createCellStyle();
+            style.setFont(font);
+            headerCell.setCellStyle(style);
+        }
+
+        // thêm dữ liệu trong jtable vào trong file
+        for (int i = 0; i < table.getRowCount(); i++) {
+            Row row = sheet.createRow(i + 1);
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                Cell cell = row.createCell(j);
+                cell.setCellValue(table.getValueAt(i, j).toString());
+            }
+        }
+        FileOutputStream fileOut = new FileOutputStream("QL_LichDangKyPhongVan.xlsx");
+        workbook.write(fileOut);
+        fileOut.close();
+        JOptionPane.showMessageDialog(null, "Đã xuất ra file: QL_LichDangKyPhongVan.xlsx");
+    }
+
+    private void thongKeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thongKeBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            pt_XuatFileExcel(tableLichDangKy_Admin);
+        } catch (IOException ex) {
+            JOptionPane.showConfirmDialog(null, ex.toString());
+        }
     }//GEN-LAST:event_thongKeBtnActionPerformed
 
     private void thoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thoatActionPerformed
@@ -415,6 +445,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
             });
         }
     }
+
     // Xóa toàn bộ các hàng của bảng
     public void clearTable() {
         DefaultTableModel modelTable = (DefaultTableModel) tableLichDangKy_Admin.getModel();

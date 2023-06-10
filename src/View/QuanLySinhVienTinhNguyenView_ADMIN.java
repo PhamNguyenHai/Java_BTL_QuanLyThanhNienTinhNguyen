@@ -15,6 +15,12 @@ import qlsinhvientinhnguyen.Models;
 import qlsinhvientinhnguyen.SinhVien;
 import qlsinhvientinhnguyen.SinhVienPhongVan;
 import qlsinhvientinhnguyen.SinhVienTinhNguyen;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Font;
 
 /**
  *
@@ -383,8 +389,45 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
         }
     }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    Workbook workbook = new XSSFWorkbook(); // tạo mới đối tượng đại diện cho excel.
+    Sheet sheet = (Sheet) workbook.createSheet("QL_DonHang"); // tạo 1 đối tượng sheet, đại diện cho sheet bên trong file Excel
 
+    public void pt_XuatFileExcel(JTable table) throws IOException {
+
+        // tạo tên cột 
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            Cell headerCell = headerRow.createCell(i);
+            headerCell.setCellValue(table.getColumnName(i));
+            // tạo font chữ đận cho tên cột 
+            org.apache.poi.ss.usermodel.Font font = workbook.createFont();
+            //font.setFontWeight(FontWeight.BOLD);
+            org.apache.poi.ss.usermodel.CellStyle style = workbook.createCellStyle();
+            style.setFont(font);
+            headerCell.setCellStyle(style);
+        }
+
+        // thêm dữ liệu trong jtable vào trong file
+        for (int i = 0; i < table.getRowCount(); i++) {
+            Row row = sheet.createRow(i + 1);
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                Cell cell = row.createCell(j);
+                cell.setCellValue(table.getValueAt(i, j).toString());
+            }
+        }
+        FileOutputStream fileOut = new FileOutputStream("QL_SinhVienTinhNguyen.xlsx");
+        workbook.write(fileOut);
+        fileOut.close();
+        JOptionPane.showMessageDialog(null, "Đã xuất ra file: QL_SinhVienTinhNguyen.xlsx");
+    }
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            // TODO add your handling code here:
+            pt_XuatFileExcel(tb_dssvtn);
+        } catch (IOException ex) {
+            JOptionPane.showConfirmDialog(null, ex.toString());
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -422,7 +465,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             model.Import();
             clearTable();
             loadTable();
