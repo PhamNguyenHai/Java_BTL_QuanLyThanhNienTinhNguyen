@@ -332,6 +332,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        updateDB_Local();
         dongSelect = tb_dssvtn.getSelectedRow();
         System.out.println("Dòng chọn: " + dongSelect);
         try {
@@ -480,12 +481,13 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-        public static QuanLySinhVienTinhNguyenView_ADMIN getInstance() {
+    public static QuanLySinhVienTinhNguyenView_ADMIN getInstance() {
         if (instance == null) {
             instance = new QuanLySinhVienTinhNguyenView_ADMIN();
         }
         return instance;
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -377,6 +377,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
 
     private void btnChapNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChapNhanActionPerformed
         // TODO add your handling code here:
+        updateDB_Local();
         try {
             dong = tableSVDangKy.getSelectedRow();
             int check = 0;
@@ -396,8 +397,8 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
                             iterator.remove();
                             model.ListSinhViens.add(svtn);
                             model.SaveChange();
-                            for (SinhVien i : model.getListSinhViens())  {
-                                if(i instanceof SinhVienPhongVan) {
+                            for (SinhVien i : model.getListSinhViens()) {
+                                if (i instanceof SinhVienPhongVan) {
                                     check += 1;
                                 }
                             }
