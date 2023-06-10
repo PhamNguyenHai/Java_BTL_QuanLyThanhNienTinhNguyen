@@ -314,8 +314,8 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
                         int slPV = model.getListPhongVans().size();
                         String maPV = model.getListPhongVans().get(slPV - 1).getMaPV().substring(2);
                         int soMaPV = Integer.parseInt(maPV) + 1;
-                        String MaPV = "PV" + String.valueOf(soMaPV);
-
+                        String MaPV = soMaPV < 10 ? "PV0" + String.valueOf(soMaPV) : "PV" + String.valueOf(soMaPV);
+                        
                         // Add Phỏng Vấn
                         try {
                             int SoLuong = Integer.parseInt(txtSoLuong.getText());

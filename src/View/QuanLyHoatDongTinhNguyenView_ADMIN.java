@@ -391,6 +391,7 @@ public class QuanLyHoatDongTinhNguyenView_ADMIN extends javax.swing.JFrame {
                 throw new Exception("Vui lòng nhập đầy đủ thông tin");
             else{
                 HoatDong them = new HoatDong(model.getNewMaHD(), txtTenHD.getText(), dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), txtMoTaHD.getText(), txtNguoiQLyHD.getText(), Double.parseDouble(txtChiPhiHoTro.getText()));
+                System.out.println(them.getMaHD());
                 model.ListHoatDongs.add(them);
                 model.SaveChange();
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
