@@ -7,7 +7,6 @@ package View;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-
 /**
  *
  * @author ADMIN
