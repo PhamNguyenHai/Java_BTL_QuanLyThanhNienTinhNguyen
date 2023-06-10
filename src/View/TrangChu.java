@@ -12,6 +12,7 @@ import javax.swing.JFrame;
  */
 public class TrangChu extends javax.swing.JFrame {
 
+    private static TrangChu instance;
     /**
      * Creates new form thong1
      */
@@ -112,31 +113,38 @@ public class TrangChu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DangKyLichPhongVanView_ADMIN n= new DangKyLichPhongVanView_ADMIN();
-        n.setLocationRelativeTo(null);
+        n.getInstance().setLocationRelativeTo(null);
         n.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        n.setVisible(true);
+        n.getInstance().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnDSDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDSDangKyActionPerformed
         // TODO add your handling code here:
         System.out.println("DONE");
         DanhSachSVDangKyView_ADMIN n= new DanhSachSVDangKyView_ADMIN();
-        n.setLocationRelativeTo(null);
+        n.getInstance().setLocationRelativeTo(null);
         n.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        n.setVisible(true);
+        n.getInstance().setVisible(true);
     }//GEN-LAST:event_btnDSDangKyActionPerformed
 
     private void btnQLSVTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLSVTNActionPerformed
         // TODO add your handling code here:
         QuanLySinhVienTinhNguyenView_ADMIN n = new QuanLySinhVienTinhNguyenView_ADMIN();
-        n.setLocationRelativeTo(null);
-         n.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        n.setVisible(true);
+        n.getInstance().setLocationRelativeTo(null);
+        n.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        n.getInstance().setVisible(true);
     }//GEN-LAST:event_btnQLSVTNActionPerformed
 
     /**
      * @param args the command line arguments
      */
+     public static TrangChu getInstance() {
+        if (instance == null) {
+            instance = new TrangChu();
+        }
+        return instance;
+    }
+     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -167,7 +175,7 @@ public class TrangChu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TrangChu().setVisible(true);
+                new TrangChu().getInstance().setVisible(true);
             }
         });
     }
@@ -181,7 +189,4 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
-    Object getInstance() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

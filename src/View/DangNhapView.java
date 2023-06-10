@@ -15,7 +15,6 @@ import qlsinhvientinhnguyen.TaiKhoan;
  * @author ADMIN
  */
 public class DangNhapView extends javax.swing.JFrame {
-
     /**
      * Creates new form DangNhapView
      */ 

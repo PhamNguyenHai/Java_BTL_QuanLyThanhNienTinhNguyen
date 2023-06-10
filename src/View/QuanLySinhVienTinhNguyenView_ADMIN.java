@@ -35,6 +35,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
     ArrayList<SinhVienTinhNguyen> svtn = new ArrayList<SinhVienTinhNguyen>();
     int dongChon = -1;
     int dongSelect = -1;
+    private static QuanLySinhVienTinhNguyenView_ADMIN instance;
 
     public QuanLySinhVienTinhNguyenView_ADMIN() {
         initComponents();
@@ -433,8 +434,8 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         DanhSachSVDangKyView_ADMIN dsdk = new DanhSachSVDangKyView_ADMIN();
-        dsdk.setLocationRelativeTo(null);
-        dsdk.setVisible(true);
+        dsdk.getInstance().setLocationRelativeTo(null);
+        dsdk.getInstance().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void cb_vaiTroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_vaiTroActionPerformed
@@ -477,6 +478,12 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+        public static QuanLySinhVienTinhNguyenView_ADMIN getInstance() {
+        if (instance == null) {
+            instance = new QuanLySinhVienTinhNguyenView_ADMIN();
+        }
+        return instance;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -504,7 +511,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuanLySinhVienTinhNguyenView_ADMIN().setVisible(true);
+                new QuanLySinhVienTinhNguyenView_ADMIN().getInstance().setVisible(true);
             }
         });
     }

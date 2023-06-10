@@ -30,6 +30,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
     ArrayList<SinhVienTinhNguyen> dsSVTN_local;
     int dong = -1;
     int soLuongThamGia;
+    private static DanhSachSVDangKyView_ADMIN instance;
 
     /**
      * Creates new form DanhSachSVDangKyView_ADMIN
@@ -477,13 +478,19 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         QuanLySinhVienTinhNguyenView_ADMIN dsdk = new QuanLySinhVienTinhNguyenView_ADMIN();
-        dsdk.setLocationRelativeTo(null);
-        dsdk.setVisible(true);
+        dsdk.getInstance().setLocationRelativeTo(null);
+        dsdk.getInstance().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    public static DanhSachSVDangKyView_ADMIN getInstance() {
+        if (instance == null) {
+            instance = new DanhSachSVDangKyView_ADMIN();
+        }
+        return instance;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -511,7 +518,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DanhSachSVDangKyView_ADMIN().setVisible(true);
+                new DanhSachSVDangKyView_ADMIN().getInstance().setVisible(true);
             }
         });
     }

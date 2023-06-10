@@ -40,6 +40,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
     ArrayList<SinhVienPhongVan> listSVPhongVan = new ArrayList<>();
     int dong = -1;
     LocalDate localDate;
+    private static DangKyLichPhongVanView_ADMIN instance;
 
     /**
      * Creates new form DangKyLichPhongVanView_ADMIN
@@ -455,6 +456,14 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+     public static DangKyLichPhongVanView_ADMIN getInstance() {
+        if (instance == null) {
+            instance = new DangKyLichPhongVanView_ADMIN();
+        }
+        return instance;
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -482,7 +491,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DangKyLichPhongVanView_ADMIN().setVisible(true);
+                new DangKyLichPhongVanView_ADMIN().getInstance().setVisible(true);
             }
         });
     }
