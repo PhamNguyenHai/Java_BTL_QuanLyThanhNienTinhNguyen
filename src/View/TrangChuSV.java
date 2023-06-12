@@ -140,7 +140,7 @@ public class TrangChuSV extends javax.swing.JFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
-        int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất không", "Xác nhận đăng xuất", JOptionPane.YES_NO_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất không?", "Xác nhận đăng xuất", JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION) {
             dispose();
             DangNhapView n = new DangNhapView();
