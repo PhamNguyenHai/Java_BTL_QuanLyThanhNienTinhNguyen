@@ -285,7 +285,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
         try {
             String maDHS = txt_tenSearch.getText();
             for (SinhVienTinhNguyen i : svtn) {
-                if (i.getTenSV().toLowerCase().contains(maDHS)) {
+                if (i.getTenSV().toLowerCase().contains(maDHS.toLowerCase())) {
                     lsDHSearch.add(i);
                 }
             }

@@ -37,7 +37,7 @@ public class DangKyView extends javax.swing.JFrame {
     public DangKyView() {
         initComponents();
         try {
-            model.Import();
+            model.Import(); //đọc dữ liệu từ file 
             loadList();
             ArrayList<String> ngayphongvan = new ArrayList<>();
             //loadCombobox(ngayphongvan);
@@ -46,16 +46,16 @@ public class DangKyView extends javax.swing.JFrame {
         }
 
     }
-
-    private ArrayList<PhongVan> getNgayPhongVanList() {
-        ArrayList<PhongVan> ngayphongvan = new ArrayList<>();
-        for (PhongVan i : model.getListPhongVans()) {
-            if (i instanceof PhongVan) {
-                ngayphongvan.add(i);
-            }
-        }
-        return ngayphongvan;
-    }
+//
+//    private ArrayList<PhongVan> getNgayPhongVanList() {
+//        ArrayList<PhongVan> ngayphongvan = new ArrayList<>();
+//        for (PhongVan i : model.getListPhongVans()) {
+//            if (i instanceof PhongVan) {
+//                ngayphongvan.add(i);
+//            }
+//        }
+//        return ngayphongvan;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -268,7 +268,7 @@ public class DangKyView extends javax.swing.JFrame {
         if (clickKT) {
             int dem = 0;
             try {
-                for (PhongVan i : model.getListPhongVans()) {
+                for (PhongVan i : model.getListPhongVans()) {//duyệt qua từng đối tượng PhongVan trong list PhongVan
                     if (i.getNgayPV().toString().equals(selectCB)) {
                         for (SinhVien sv : model.getListSinhViens()) {
                             if (sv instanceof SinhVienPhongVan) {
@@ -278,7 +278,7 @@ public class DangKyView extends javax.swing.JFrame {
                                         soLuongThamGia = i.getSoLuongThamGia();
                                         i.setSoLuongThamGia(++soLuongThamGia);
                                         sinhvienphongvan.setPhongVan(i);
-                                        model.SaveChange();
+                                        model.SaveChange();//lưu dữ liệu vào file data
                                         JOptionPane.showMessageDialog(null, "Gửi yêu cầu thành công!");
 
                                     } else {
