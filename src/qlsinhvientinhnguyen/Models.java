@@ -18,7 +18,7 @@ public class Models implements Serializable{
     public ArrayList<HoatDong> ListHoatDongs;
     public ArrayList<Lop> ListLops;
 
-    public Models() {
+        public Models() {
         ListHoatDongs = new ArrayList<HoatDong>();
         ListLops = new ArrayList<Lop>();
         ListTaiKhoans = new ArrayList<TaiKhoan>();

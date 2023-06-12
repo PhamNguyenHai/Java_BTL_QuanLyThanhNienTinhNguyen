@@ -66,13 +66,13 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
         modelTable.setRowCount(0);
         int dem = 0;
 
-        for (SinhVien i : model.getListSinhViens()) {
-            if (i instanceof SinhVienTinhNguyen) {
+        for (SinhVienTinhNguyen i : svtn) {
+//            if (i instanceof SinhVienTinhNguyen) {
                 modelTable.addRow(new Object[]{
                     ++dem, i.getMaSV(), i.getTenSV(), i.getLop().getTenLop(), i.getLop().getKhoa(),
-                    i.getLop().getNienKhoa(), i.getSDT(), i.getMaSV(), ((SinhVienTinhNguyen) i).getVaiTro()
+                    i.getLop().getNienKhoa(), i.getSDT(), i.getEmail(), ((SinhVienTinhNguyen) i).getVaiTro()
                 });
-            }
+//            }
         }
     }
 
@@ -296,7 +296,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
                 for (SinhVienTinhNguyen i : lsDHSearch) {
                     modelTable.addRow(new Object[]{
                         ++dem, i.getMaSV(), i.getTenSV(), i.getLop().getTenLop(), i.getLop().getKhoa(),
-                        i.getLop().getNienKhoa(), i.getSDT(), i.getMaSV(), i.getVaiTro()
+                        i.getLop().getNienKhoa(), i.getSDT(), i.getEmail(), i.getVaiTro()
                     });
                 }
             } else {
@@ -321,7 +321,7 @@ public class QuanLySinhVienTinhNguyenView_ADMIN extends javax.swing.JFrame {
                 for (SinhVienTinhNguyen i : svtn) {
                     modelTable.addRow(new Object[]{
                         ++dem, i.getMaSV(), i.getTenSV(), i.getLop().getTenLop(), i.getLop().getKhoa(),
-                        i.getLop().getNienKhoa(), i.getSDT(), i.getMaSV(), i.getVaiTro()
+                        i.getLop().getNienKhoa(), i.getSDT(), i.getEmail(), i.getVaiTro()
                     });
                 }
             } else {
