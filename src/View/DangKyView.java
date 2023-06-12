@@ -71,16 +71,16 @@ public class DangKyView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtMaSV = new javax.swing.JTextField();
+        HoTentxt = new javax.swing.JTextField();
+        Loptxt = new javax.swing.JTextField();
+        ThoiGiancb = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnThoat = new javax.swing.JButton();
         btnGuiYeuCau = new javax.swing.JButton();
         btnKiemTra = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listPhongPV = new javax.swing.JList<>();
         btnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,27 +100,27 @@ public class DangKyView extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Thời gian:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setToolTipText("");
-        jTextField1.setName("inputmasv"); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtMaSV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtMaSV.setToolTipText("");
+        txtMaSV.setName("inputmasv"); // NOI18N
+        txtMaSV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtMaSVActionPerformed(evt);
             }
         });
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        HoTentxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        HoTentxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                HoTentxtActionPerformed(evt);
             }
         });
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Loptxt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        ThoiGiancb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                ThoiGiancbActionPerformed(evt);
             }
         });
 
@@ -128,11 +128,11 @@ public class DangKyView extends javax.swing.JFrame {
         jLabel6.setText("Các phòng phỏng vấn hiện có:");
         jLabel6.setToolTipText("");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Thoát");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnThoat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnThoatActionPerformed(evt);
             }
         });
 
@@ -153,7 +153,7 @@ public class DangKyView extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(listPhongPV);
 
         btnRefresh.setText("Làm mới");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +176,7 @@ public class DangKyView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 409, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(185, 185, 185))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -185,12 +185,12 @@ public class DangKyView extends javax.swing.JFrame {
                                 .addGap(118, 118, 118)
                                 .addComponent(btnGuiYeuCau, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnKiemTra))
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Loptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(HoTentxt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ThoiGiancb, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,25 +211,25 @@ public class DangKyView extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnKiemTra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HoTentxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Loptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ThoiGiancb, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuiYeuCau, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,19 +248,19 @@ public class DangKyView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void HoTentxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HoTentxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_HoTentxtActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtMaSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSVActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtMaSVActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnGuiYeuCauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiYeuCauActionPerformed
         // TODO add your handling code here:
@@ -273,7 +273,7 @@ public class DangKyView extends javax.swing.JFrame {
                         for (SinhVien sv : model.getListSinhViens()) {
                             if (sv instanceof SinhVienPhongVan) {
                                 SinhVienPhongVan sinhvienphongvan = (SinhVienPhongVan) sv;
-                                if (sinhvienphongvan.getMaSV().equals(jTextField1.getText()) && sinhvienphongvan.getPhongVan() == null) {
+                                if (sinhvienphongvan.getMaSV().equals(txtMaSV.getText()) && sinhvienphongvan.getPhongVan() == null) {
                                     if (i.getSoLuongThamGia() < i.getSoLuong()) {
                                         soLuongThamGia = i.getSoLuongThamGia();
                                         i.setSoLuongThamGia(++soLuongThamGia);
@@ -285,7 +285,7 @@ public class DangKyView extends javax.swing.JFrame {
                                         JOptionPane.showMessageDialog(null, "Đã nhận đủ số lượng phỏng vấn ngày " + i.getNgayPV());
                                     }
 
-                                } else if (sinhvienphongvan.getMaSV().equals(jTextField1.getText()) && sinhvienphongvan.getPhongVan() != null) {
+                                } else if (sinhvienphongvan.getMaSV().equals(txtMaSV.getText()) && sinhvienphongvan.getPhongVan() != null) {
                                     JOptionPane.showMessageDialog(null, "Sinh viên đã gửi yêu cầu trước đó!");
                                 }
                             }
@@ -313,7 +313,7 @@ public class DangKyView extends javax.swing.JFrame {
     private void btnKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKiemTraActionPerformed
         // TODO add your handling code here:
         found = false;
-        String maSV = jTextField1.getText();
+        String maSV = txtMaSV.getText();
         ArrayList<SinhVien> svpv = new ArrayList<SinhVien>();
         svpv = model.getListSinhViens();
         // String hoTen = jTextField2.getText();
@@ -326,17 +326,17 @@ public class DangKyView extends javax.swing.JFrame {
                     if (maSV.equals(sinhvienphongvan.getMaSV())) {
                         found = true;
                         clickKT = true;
-                        jTextField2.setText(sinhvienphongvan.getTenSV());
-                        jTextField3.setText(sinhvienphongvan.getLop().getTenLop());
+                        HoTentxt.setText(sinhvienphongvan.getTenSV());
+                        Loptxt.setText(sinhvienphongvan.getLop().getTenLop());
                         loadConboBox();
                         break;
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Sinh viên đã là sinh viên tình nguyện");
                     found = true;
-                    jTextField2.setText("");
-                    jTextField3.setText("");
-                    jComboBox1.removeAllItems();
+                    HoTentxt.setText("");
+                    Loptxt.setText("");
+                    ThoiGiancb.removeAllItems();
                     break;
                 }
             }
@@ -345,9 +345,9 @@ public class DangKyView extends javax.swing.JFrame {
         if (!found) {
             // Dữ liệu đã tồn tại
             JOptionPane.showMessageDialog(null, "Không tồn tại sinh viên!");
-            jTextField2.setText("");
-            jTextField3.setText("");
-            jComboBox1.removeAllItems();
+            HoTentxt.setText("");
+            Loptxt.setText("");
+            ThoiGiancb.removeAllItems();
         }
     }//GEN-LAST:event_btnKiemTraActionPerformed
 
@@ -355,7 +355,7 @@ public class DangKyView extends javax.swing.JFrame {
         try {
             model.Import();
             updateList();
-            jList1.repaint();
+            listPhongPV.repaint();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -373,19 +373,19 @@ public class DangKyView extends javax.swing.JFrame {
         return false;
     }
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void ThoiGiancbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThoiGiancbActionPerformed
         // TODO add your handling code here:
-        selectCB = (String) jComboBox1.getSelectedItem();
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        selectCB = (String) ThoiGiancb.getSelectedItem();
+    }//GEN-LAST:event_ThoiGiancbActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
         refreshList();
     }//GEN-LAST:event_btnRefreshActionPerformed
     private void loadConboBox() {
-        jComboBox1.removeAllItems();
+        ThoiGiancb.removeAllItems();
         for (PhongVan i : model.getListPhongVans()) {
-            jComboBox1.addItem(i.getNgayPV().toString());
+            ThoiGiancb.addItem(i.getNgayPV().toString());
         }
     }
 
@@ -397,11 +397,11 @@ public class DangKyView extends javax.swing.JFrame {
                     + " người tại phòng " + item.getPhongPV() + ": " + item.getSoLuongThamGia() + "/" + item.getSoLuong());
 
         }
-        jList1.setModel(listModel1);
+        listPhongPV.setModel(listModel1);
     }
 
     private void updateList() {
-        DefaultListModel<String> listModel = (DefaultListModel<String>) jList1.getModel();
+        DefaultListModel<String> listModel = (DefaultListModel<String>) listPhongPV.getModel();
         listModel.clear(); // Xóa sạch danh sách hiện tại
 
         // Thêm lại các phần tử đã được cập nhật giá trị SoLuongThamGia
@@ -451,22 +451,22 @@ public class DangKyView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField HoTentxt;
+    private javax.swing.JTextField Loptxt;
+    private javax.swing.JComboBox<String> ThoiGiancb;
     private javax.swing.JButton btnGuiYeuCau;
     private javax.swing.JButton btnKiemTra;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnThoat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JList<String> listPhongPV;
+    private javax.swing.JTextField txtMaSV;
     // End of variables declaration//GEN-END:variables
 
 }

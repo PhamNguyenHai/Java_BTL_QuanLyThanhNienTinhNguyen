@@ -283,8 +283,6 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         try {
             dong = tableSVDangKy.getSelectedRow();
             if (dong != -1) {
-                SinhVienPhongVan svpv_acp = dsSVPV_local.get(dong);
-                SinhVienPhongVan svpv = new SinhVienPhongVan(svpv_acp.getMaSV(), svpv_acp.getTenSV(), svpv_acp.getLop(), svpv_acp.getSDT(), svpv_acp.getEmail(), null);
                 Iterator<SinhVien> iterator = model.ListSinhViens.iterator();
                 while (iterator.hasNext()) {
                     SinhVien sv = iterator.next();
@@ -294,8 +292,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
 
                         if (svPhongVan.getMaSV().equals(dsSVPV_local.get(dong).getMaSV())) {
 
-                            iterator.remove();
-                            model.ListSinhViens.add(svpv);
+                            ((SinhVienPhongVan) sv).setPhongVan(null);
                             model.SaveChange();
                             updateDB_Local();
 
@@ -336,9 +333,10 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThoatActionPerformed
 
     Comparator<SinhVienPhongVan> tenSVComparator = Comparator.comparing(
-            SinhVienPhongVan::getTenSV,
-            Collator.getInstance(new Locale("vi", "VN"))
-    );
+    SinhVienPhongVan::getTenSV,
+    Collator.getInstance(new Locale("vi", "VN"))
+);
+
 
     private void cbSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSapXepActionPerformed
         // TODO add your handling code here:
@@ -381,7 +379,6 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
         updateDB_Local();
         try {
             dong = tableSVDangKy.getSelectedRow();
-            int check = 0;
             if (dong != -1) {
                 SinhVienPhongVan svpv_acp = dsSVPV_local.get(dong);
                 SinhVienTinhNguyen svtn = new SinhVienTinhNguyen(svpv_acp.getMaSV(), svpv_acp.getTenSV(), svpv_acp.getLop(), svpv_acp.getSDT(), svpv_acp.getEmail(), themTK(svpv_acp.getMaSV()), "Thành viên");
@@ -398,11 +395,6 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
                             iterator.remove();
                             model.ListSinhViens.add(svtn);
                             model.SaveChange();
-                            for (SinhVien i : model.getListSinhViens()) {
-                                if (i instanceof SinhVienPhongVan) {
-                                    check += 1;
-                                }
-                            }
                             updateDB_Local();
                             clearTable();
                             loadTableLichDangKy(dsSVPV_local);
@@ -463,22 +455,7 @@ public class DanhSachSVDangKyView_ADMIN extends javax.swing.JFrame {
                 ++dem, i.getMaSV(), i.getTenSV(), i.getLop().getTenLop(), i.getLop().getKhoa(), i.getLop().getNienKhoa(), i.getSDT(), i.getEmail(), i.getPhongVan().getNgayPV()});
         }
     }
-
-    public void fakeData_PhongVan() {
-        ArrayList<PhongVan> dspv = model.getListPhongVans();
-        for (SinhVien i : model.getListSinhViens()) {
-            if (i instanceof SinhVienPhongVan) {
-                SinhVienPhongVan svPhongVan = (SinhVienPhongVan) i;
-                svPhongVan.setPhongVan(dspv.get(0));
-            }
-        }
-        try {
-            model.SaveChange();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-    }
-
+    
     public void clearTable() {
         DefaultTableModel modelTable = (DefaultTableModel) tableSVDangKy.getModel();
         modelTable.setRowCount(0);

@@ -412,6 +412,7 @@ public class DangKyLichPhongVanView_ADMIN extends javax.swing.JFrame {
                 Collections.sort(dsPV_sort, Comparator.comparing(PhongVan::getNgayPV));
             }
             clearTable();
+            
             DefaultTableModel modelTable = (DefaultTableModel) tableLichDangKy_Admin.getModel();
             int dem = 0;
             for (PhongVan i : dsPV_sort) {
